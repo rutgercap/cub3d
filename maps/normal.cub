@@ -1,0 +1,18 @@
+R 360 240
+NO ./textures/redbrick.png
+SO ./textures/greystone.png
+WE ./textures/colorstone.png
+EA ./textures/bluestone.png
+
+S ./textures/barrel.png
+F 255,0,0
+C 0,30,0
+
+  111
+1110111
+100000111
+10000000111
+100W0000001
+10000011111
+1100111
+ 1111

@@ -1,0 +1,16 @@
+R 20 10
+NO ./textures/redbrick.png
+SO ./textures/greystone.png
+WE ./textures/colorstone.png
+EA ./textures/bluestone.png
+
+S ./textures/barrel.png
+F 220,100,0
+C 225,30,0
+
+111111
+122221
+122221
+1W2221
+122221
+111111

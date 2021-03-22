@@ -6,7 +6,7 @@
 /*   By: rcappend <rcappend@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/11 10:32:16 by rcappend      #+#    #+#                 */
-/*   Updated: 2021/01/18 18:37:56 by rcappend      ########   odam.nl         */
+/*   Updated: 2021/02/17 16:21:01 by rcappend      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ void				*ft_calloc(size_t count, size_t size);
 
 char				*ft_strdup(const char *s1);
 
+void				ft_strcpy(char *dst, const char *src, size_t dstsize);
+
 size_t				ft_strlcat(char *dst, const char *src, size_t dstsize);
 
 size_t				ft_strlcpy(char *dst, const char *src, size_t dstsize);
@@ -96,8 +98,12 @@ int					ft_isspace(int c);
 
 int					ft_abs(int i);
 
+double				ft_double_abs(double i);
+
 size_t				ft_strnlen(const char *s, size_t maxlen);
 
 char				*ft_itoa_base(unsigned int n, char *base);
+
+int					create_trgb(int t, int r, int g, int b);
 
 #	endif

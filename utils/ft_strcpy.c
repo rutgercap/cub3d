@@ -1,16 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_abs.c                                           :+:    :+:            */
+/*   ft_strcpy.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rcappend <rcappend@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/11/15 10:10:11 by rcappend      #+#    #+#                 */
-/*   Updated: 2020/12/07 11:25:41 by rcappend      ########   odam.nl         */
+/*   Created: 2021/01/25 10:18:52 by rcappend      #+#    #+#                 */
+/*   Updated: 2021/01/25 10:21:13 by rcappend      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_abs(int i)
+#include "utils.h"
+
+void	ft_strcpy(char *dst, const char *src, size_t dstsize)
 {
-	return ((i < 0) ? -i : i);
+	size_t	i;
+
+	if (!dst && !src)
+		return ;
+	if (dstsize == 0)
+		return ;
+	i = 0;
+	while (src[i] != '\0' && i < dstsize)
+	{
+		*dst = src[i];
+		dst++;
+		i++;
+	}
 }
