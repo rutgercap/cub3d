@@ -6,7 +6,7 @@
 /*   By: rcappend <rcappend@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/18 18:13:38 by rcappend      #+#    #+#                 */
-/*   Updated: 2021/03/08 12:41:47 by rcappend      ########   odam.nl         */
+/*   Updated: 2021/03/23 08:37:17 by rcappend      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,48 @@
 # define CONFIG_H
 
 #include <fcntl.h>
-#include "cub3d.h"
 #include "gnl/get_next_line.h"
 #include "utils/utils.h"
+#include "cub3d.h"
 
-int			save_config(const char *line, t_game *game, \
-			t_textures *text, int *conf_n);
+# define WALL 49
+# define FLOOR 48
+# define OPEN 32
 
-int			save_map(const char *line, t_map *map, int *conf_n);
+typedef struct	s_pos
+{
+	int		x;
+	int		y;
+	char	dir;
+}				t_pos;
 
-int			make_grid(t_map *map);
+typedef struct	s_conf
+{
+	int		res_x;
+	int		res_y;
+	char	*no_path;
+	char	*so_path;
+	char	*we_path;
+	char	*ea_path;
+	char	*spr_path;
+	int		f_col;
+	int		c_col;
+	char	**map;
+	int		width;
+	int		height;
+	t_pos	start_pos;
+}				t_conf;
 
-int			check_map(const t_map map, t_player *player);
+void			free_conf(t_conf *conf);
 
-int			ascii_to_dir(t_player *player);
+int				save_config(const char *line, t_game *game, t_textures *text, int *conf_n);
+
+int				save_map(const char *line, t_map *map, int *conf_n);
+
+int				ascii_to_dir(t_player *player);
+
+int				make_grid(t_map *map);
+
+int				check_map(const t_map map, t_player *player);
 
 #endif
