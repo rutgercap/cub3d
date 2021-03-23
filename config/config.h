@@ -6,7 +6,7 @@
 /*   By: rcappend <rcappend@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/18 18:13:38 by rcappend      #+#    #+#                 */
-/*   Updated: 2021/03/23 08:37:17 by rcappend      ########   odam.nl         */
+/*   Updated: 2021/03/23 09:11:25 by rcappend      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,26 +24,26 @@
 
 typedef struct	s_pos
 {
-	int		x;
-	int		y;
-	char	dir;
+	int			x;
+	int			y;
+	char		dir;
 }				t_pos;
 
 typedef struct	s_conf
 {
-	int		res_x;
-	int		res_y;
-	char	*no_path;
-	char	*so_path;
-	char	*we_path;
-	char	*ea_path;
-	char	*spr_path;
-	int		f_col;
-	int		c_col;
-	char	**map;
-	int		width;
-	int		height;
-	t_pos	start_pos;
+	int			res_x;
+	int			res_y;
+
+	char		*so_path;
+	char		*we_path;
+	char		*ea_path;
+	char		*spr_path;
+	int			f_col;
+	int			c_col;
+	char		**map;
+	int			width;
+	int			height;
+	t_pos		start_pos;
 }				t_conf;
 
 void			free_conf(t_conf *conf);
