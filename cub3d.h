@@ -6,7 +6,7 @@
 /*   By: rcappend <rcappend@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/18 18:15:11 by rcappend      #+#    #+#                 */
-/*   Updated: 2021/03/12 09:50:23 by rcappend      ########   odam.nl         */
+/*   Updated: 2021/03/25 12:16:00 by rcappend      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@
 
 typedef struct 			s_sprite {
 	double              distance;
-    int					x;
-	int					y;
+    double				x;
+	double				y;
 	char				type;
 	struct s_sprite		*next;
 }						t_sprite;
@@ -118,17 +118,17 @@ typedef struct	s_game
     int         rotate;
 }				t_game;
 
-int		init_game(t_game *game);
+void	init_game(t_game *game);
 
 int		xy_to_map(const int x, const int y, const t_map map);
 
-int		save_sprites(t_sprite **sprite, t_map map);
+void	save_sprites(t_sprite **sprite, t_map map);
 
 int		exit_error(char const *str);
 
-int		read_file(const char *file_path, t_game *game);
+void	read_file(const char *file_path, t_game *game);
 
-int		load_textures(t_textures *texts, void *mlx_ptr);
+void	load_textures(t_textures *texts, void *mlx_ptr);
 
 int		key_press(const int keycode, t_game *game);
 

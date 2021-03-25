@@ -6,7 +6,7 @@
 /*   By: rcappend <rcappend@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/18 18:00:26 by rcappend      #+#    #+#                 */
-/*   Updated: 2021/03/12 16:45:47 by rcappend      ########   odam.nl         */
+/*   Updated: 2021/03/25 12:40:36 by rcappend      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int		save_res(const char *line, t_mlx *win)
 	win->res_x = ft_atoi(line);
 	while (ft_isdigit(*line))
 		line++;
-	if (*line == ' ')
+	while(ft_isspace(*line))
 		line++;
 	if (!ft_isdigit(*line))
 		return (EXIT_FAILURE);

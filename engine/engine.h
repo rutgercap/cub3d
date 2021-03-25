@@ -6,7 +6,7 @@
 /*   By: rcappend <rcappend@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/18 09:37:53 by rcappend      #+#    #+#                 */
-/*   Updated: 2021/03/14 11:56:44 by rcappend      ########   odam.nl         */
+/*   Updated: 2021/03/25 08:11:04 by rcappend      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,13 +75,13 @@ void			raycaster(t_ray *ray, const t_game game, int *sprites, double *distance);
 
 void			draw_room(t_image *img, const t_game game, const t_ray ray);
 
-void	    	draw_sprites(t_image *img, const t_game game, double *z_buffer);
+void		    draw_sprites(t_image *img, t_sprite **head, const t_game game, double *z_buffer);
 
 void        	merge_sort_sprites(t_sprite **head_ref);
 
 void	    	set_transform(t_draw_spr *dst, const t_sprite sprite, const t_player player, const int w);
 
-void		    set_sprite_distance(t_sprite **head, const int pos_x, const int pos_y);
+void    		set_sprite_distance(t_sprite **head, const double pos_x, const double pos_y);
 
 void			set_draw_y(t_draw *draw, const int h, const double trans_y);
 

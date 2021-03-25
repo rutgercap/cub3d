@@ -6,7 +6,7 @@
 /*   By: rcappend <rcappend@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/10 12:37:47 by rcappend      #+#    #+#                 */
-/*   Updated: 2021/03/14 09:42:22 by rcappend      ########   odam.nl         */
+/*   Updated: 2021/03/25 12:17:01 by rcappend      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,23 +74,22 @@ void			merge_sort_sprites(t_sprite **head_ref)
 	*head_ref = sorted_merge(a, b);
 }
 
-static int		add_sprite_front(t_sprite **head, const int x, \
-						const int y, const char type)
+static void		add_sprite_front(t_sprite **head, const double x, \
+						const double y, const char type)
 {
 	t_sprite	*new;
 
 	new = (t_sprite*)malloc(sizeof(t_sprite));
 	if (!new)
-		return (EXIT_FAILURE);
+		exit_error("Error saving sprites");
 	new->x = x;
 	new->y = y;
 	new->type = type;
 	new->next = *head;
 	*head = new;
-	return (EXIT_SUCCESS);
 }
 
-int				save_sprites(t_sprite **sprite, t_map map)
+void			save_sprites(t_sprite **sprite, t_map map)
 {
 	t_sprite	*head;
 	char		type;
@@ -106,12 +105,10 @@ int				save_sprites(t_sprite **sprite, t_map map)
 		{
 			type = xy_to_map(x, y, map);
 			if (type == SPRITE)
-				if (add_sprite_front(&head, x, y, type) == EXIT_FAILURE)
-					return (EXIT_FAILURE);
+				add_sprite_front(&head, x + 0.5, y + 0.5, type);		
 			x--;	
 		}
 		y--;
 	}
 	*sprite = head;
-	return (EXIT_SUCCESS);
 }

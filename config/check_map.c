@@ -6,7 +6,7 @@
 /*   By: rcappend <rcappend@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/23 11:29:50 by rcappend      #+#    #+#                 */
-/*   Updated: 2021/03/10 12:50:28 by rcappend      ########   odam.nl         */
+/*   Updated: 2021/03/25 12:02:54 by rcappend      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ static int		check_hor(t_map map)
 		{
 			if (compare(&correct, xy_to_map(x, map.height, map), \
 				xy_to_map(x + 1, map.height, map)) == EXIT_FAILURE)
-				return (EXIT_FAILURE);
+				exit_error("Map invalid");
 			x--;
 		}
 		if (correct == FALSE)
-			return (EXIT_FAILURE);
+			exit_error("Map invalid");
 		map.height--;
 	}
 	return (EXIT_SUCCESS);
@@ -69,17 +69,17 @@ static int		check_vert(t_map map)
 		{
 			if (compare(&correct, xy_to_map(map.width, y, map), \
 				xy_to_map(map.width, y + 1, map)) == EXIT_FAILURE)
-				return (EXIT_FAILURE);
+				exit_error("Map invalid");
 			y--;
 		}
 		if (correct == FALSE)
-			return (EXIT_FAILURE);
+			exit_error("Map invalid");
 		map.width--;
 	}
 	return (EXIT_SUCCESS);
 }
 
-static int		check_start_pos(t_map map, t_player *player)
+static void		check_start_pos(t_map map, t_player *player)
 {
 	int		x;
 
@@ -90,12 +90,12 @@ static int		check_start_pos(t_map map, t_player *player)
 		{
 			if (ft_strchr("NESW", xy_to_map(x, map.height, map)) != NULL)
 			{
-				if (player->dir_x != -1)
-					return (EXIT_FAILURE);
+				if (player->dir_x != -2)
+					exit_error("Double start position");
 				else
 				{
-					player->x = x;
-					player->y = map.height;
+					player->x = x + 0.5;
+					player->y = map.height + 0.5;
 					player->dir_x = xy_to_map(x, map.height, map);
 				}
 			}
@@ -103,21 +103,18 @@ static int		check_start_pos(t_map map, t_player *player)
 		}
 		map.height--;
 	}
-	return (EXIT_SUCCESS);
 }
 
-int				check_map(const t_map map, t_player *player)
+void			check_map(const t_map map, t_player *player)
 {
-	int		error;
-
-	error = check_hor(map);
-	if (!error)
-		error = check_vert(map);
-	if (!error)
-		error = check_start_pos(map, player);
-	if (!error)
-		error = ascii_to_dir(player);
-	if (error)
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
+	check_hor(map);
+	check_vert(map);
+	
+	check_start_pos(map, player);
+	if (player->dir_x == 'N' || player->dir_x == 'E')
+		north_east_to_dir(player);
+	else if (player->dir_x == 'S' || player->dir_x == 'W')
+		south_west_to_dir(player);
+	if (player->dir_x == -2)
+		exit_error("No start position given");
 }

@@ -6,7 +6,7 @@
 /*   By: rcappend <rcappend@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/18 18:13:38 by rcappend      #+#    #+#                 */
-/*   Updated: 2021/03/23 09:11:25 by rcappend      ########   odam.nl         */
+/*   Updated: 2021/03/25 12:04:30 by rcappend      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ typedef struct	s_conf
 {
 	int			res_x;
 	int			res_y;
-
 	char		*so_path;
 	char		*we_path;
 	char		*ea_path;
@@ -52,10 +51,12 @@ int				save_config(const char *line, t_game *game, t_textures *text, int *conf_n
 
 int				save_map(const char *line, t_map *map, int *conf_n);
 
-int				ascii_to_dir(t_player *player);
+void			north_east_to_dir(t_player *player);
 
-int				make_grid(t_map *map);
+void			south_west_to_dir(t_player *player);
 
-int				check_map(const t_map map, t_player *player);
+void			make_grid(t_map *map);
+
+void			check_map(const t_map map, t_player *player);
 
 #endif

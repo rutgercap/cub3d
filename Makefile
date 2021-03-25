@@ -6,7 +6,7 @@
 #    By: rcappend <rcappend@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/01/18 13:39:03 by rcappend      #+#    #+#                  #
-#    Updated: 2021/03/14 13:42:33 by rcappend      ########   odam.nl          #
+#    Updated: 2021/03/23 11:51:07 by rcappend      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,9 @@ test: all
 
 simple: all
 	./$(NAME) maps/simple.cub
+
+simp: all
+	./$(NAME) maps/simp.cub
 
 sprite: all
 	./$(NAME) maps/sprites.cub

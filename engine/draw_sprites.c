@@ -6,7 +6,7 @@
 /*   By: rcappend <rcappend@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/12 10:18:26 by rcappend      #+#    #+#                 */
-/*   Updated: 2021/03/15 13:06:00 by rcappend      ########   odam.nl         */
+/*   Updated: 2021/03/25 08:12:12 by rcappend      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,15 @@ static void	draw_sprite_y(t_image *img, t_draw_spr dr_sp, \
 	}
 }
 
-void		draw_sprites(t_image *img, const t_game game, double *z_buffer)
+void		draw_sprites(t_image *img, t_sprite **head, \
+						const t_game game, double *z_buffer)
 {
 	t_sprite		*current;
 	t_draw_spr		dr_sp;
 	int				x;
 
-	current = game.map.sprites;
-	set_sprite_distance(&current, game.player.x, game.player.y);
+	current = *head;
+	set_sprite_distance(head, game.player.x, game.player.y);
 	while (current != NULL)
 	{
 		set_text(&dr_sp.text, current->type, game.textures);

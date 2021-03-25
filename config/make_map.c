@@ -6,40 +6,26 @@
 /*   By: rcappend <rcappend@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/22 07:59:52 by rcappend      #+#    #+#                 */
-/*   Updated: 2021/02/28 14:07:22 by rcappend      ########   odam.nl         */
+/*   Updated: 2021/03/25 12:00:24 by rcappend      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "config.h"
 
-static int		free_grid(char **grid)
-{
-	int i;
-
-	i = 0;
-	while (grid[i])
-	{
-		free(grid[i]);
-		i++;
-	}
-	free(grid);
-	return (EXIT_FAILURE);
-}
-
-int				make_grid(t_map *map)
+void			make_grid(t_map *map)
 {
 	char	**temp;
 	int		i;
 
 	temp = ft_calloc(map->height + 1, sizeof(char *));
 	if (!temp)
-		return (EXIT_FAILURE);
+		exit_error("Error saving map");
 	i = 0;
 	while (i < map->height)
 	{
 		temp[i] = ft_calloc(map->width + 1, 1);
 		if (!temp[i])
-			return (free_grid(temp));
+			exit_error("Error saving map");
 		i++;
 	}
 	i--;
@@ -52,7 +38,6 @@ int				make_grid(t_map *map)
 	}
 	free(map->map);
 	map->map = temp;
-	return (EXIT_SUCCESS);
 }
 
 static char		**add_to_map(char **map, const char *line, int n)
@@ -94,7 +79,7 @@ int				save_map(const char *line, t_map *map, int *conf_n)
 			i++;
 	temp = add_to_map(map->map, line, i);
 	if (!temp)
-		return (EXIT_FAILURE);
+		exit_error("Error saving map");
 	if (map->map)
 		free(map->map);
 	map->map = temp;

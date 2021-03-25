@@ -6,7 +6,7 @@
 /*   By: rcappend <rcappend@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/24 16:48:38 by rcappend      #+#    #+#                 */
-/*   Updated: 2021/03/08 12:46:26 by rcappend      ########   odam.nl         */
+/*   Updated: 2021/03/25 09:34:36 by rcappend      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,29 +19,38 @@ int		xy_to_map(const int x, const int y, const t_map map)
 	return (map.map[y - 1][x - 1]);
 }
 
-int		ascii_to_dir(t_player *player)
+void	north_east_to_dir(t_player *player)
 {
-	if (player->dir_x == 0)
-		return (EXIT_FAILURE);
-	else if (player->dir_x == 'N')
+	if (player->dir_x == 'N')
 	{
 		player->dir_x = 0;
 		player->dir_y = -1;
+		player->plane_x = 0.5;
+		player->plane_y = 0;
 	}
 	else if (player->dir_x == 'E')
 	{
-		player->dir_x = -1;
+		player->dir_x = 1;
 		player->dir_y = 0;
+		player->plane_x = 0;
+		player->plane_y = 0.5;
 	}
-	else if (player->dir_x == 'S')
+}
+
+void	south_west_to_dir(t_player *player)
+{
+	if (player->dir_x == 'S')
 	{
 		player->dir_x = 0;
 		player->dir_y = 1;
-	}	
+		player->plane_x = -0.5;
+		player->plane_y = 0;
+	}
 	else if (player->dir_x == 'W')
 	{
-		player->dir_x = 1;
+		player->dir_x = -1;
 		player->dir_y = 0;
-	}	
-	return (EXIT_SUCCESS);
+		player->plane_x = 0;
+		player->plane_y = -0.5;
+	}
 }

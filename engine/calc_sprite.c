@@ -6,14 +6,14 @@
 /*   By: rcappend <rcappend@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/12 12:48:07 by rcappend      #+#    #+#                 */
-/*   Updated: 2021/03/15 13:11:54 by rcappend      ########   odam.nl         */
+/*   Updated: 2021/03/23 11:59:56 by rcappend      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "engine.h"
 
-void		set_sprite_distance(t_sprite **head, const int pos_x, \
-								const int pos_y)
+void		set_sprite_distance(t_sprite **head, const double pos_x, \
+								const double pos_y)
 {
 	t_sprite	*current;
 
@@ -31,13 +31,17 @@ void		set_transform(t_draw_spr *dst, const t_sprite sprite, \
 							const t_player player, const int w)
 {
 	double		inv_det;
+	double		rel_x;
+	double		rel_y;
 
+	rel_x = sprite.x - player.x;
+	rel_y = sprite.y - player.y; 
 	inv_det = 1.0 / ((player.plane_x * player.dir_y) - \
 					(player.dir_x * player.plane_y));
-	dst->trans_x = inv_det * (player.dir_y * sprite.x - \
-								player.dir_x * sprite.y);
-	dst->trans_y = inv_det * (-player.plane_y * sprite.x + \
-								player.plane_x * sprite.y);
+	dst->trans_x = inv_det * (player.dir_y * rel_x - \
+								player.dir_x * rel_y);
+	dst->trans_y = inv_det * (-player.plane_y * rel_x + \
+								player.plane_x * rel_y);
 	dst->sprite_x = (int)(w / 2.0) * (1.0 + dst->trans_x / dst->trans_y);
 }
 

@@ -6,7 +6,7 @@
 /*   By: rcappend <rcappend@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/12 12:38:22 by rcappend      #+#    #+#                 */
-/*   Updated: 2021/03/22 12:51:21 by rcappend      ########   odam.nl         */
+/*   Updated: 2021/03/25 12:46:32 by rcappend      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ static void		draw_ceiling_floor(t_image *img, const t_textures texts, \
 {
 	int		y;
 
-	y = 1;
-	while (y < draw.draw_start)
+	y = 0;
+	while (y <= draw.draw_start)
 	{
 		my_mlx_pixel_put(img, draw.x, y, texts.c_col);
 		y++;
 	}
 	y = draw.draw_stop;
-	while (y < res_y - 1)
+	while (y <= res_y - 1)
 	{
 		my_mlx_pixel_put(img, draw.x, y, texts.f_col);
 		y++;

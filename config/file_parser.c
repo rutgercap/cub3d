@@ -6,7 +6,7 @@
 /*   By: rcappend <rcappend@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/21 16:53:58 by rcappend      #+#    #+#                 */
-/*   Updated: 2021/03/10 14:32:25 by rcappend      ########   odam.nl         */
+/*   Updated: 2021/03/25 12:03:40 by rcappend      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void		conf_init(t_mlx *win, t_textures *text, \
 	map->width = 0;
 	map->height = 0;
 	player->x = -1;
-	player->dir_x = -1;
+	player->dir_x = -2;
 }
 
 /*
@@ -38,7 +38,7 @@ static void		conf_init(t_mlx *win, t_textures *text, \
 ** next lines are sent to be saved in the map
 */
 
-static int		parse_file(const int fd, t_game *game)
+static void		parse_file(const int fd, t_game *game)
 {
 	char	*buff;
 	int		start;
@@ -52,7 +52,7 @@ static int		parse_file(const int fd, t_game *game)
 	{
 		start = get_next_line(fd, &buff);
 		if (start < 0)
-			return (EXIT_FAILURE);
+			exit_error("GNL Failure");
 		if (conf_n <= 8 && *buff != '\0')
 			error = save_config(buff, game, &game->textures, &conf_n);
 		else if (conf_n == 8 && *buff != '\0')
@@ -61,14 +61,12 @@ static int		parse_file(const int fd, t_game *game)
 			error = save_map(buff, &game->map, &conf_n);
 		free(buff);
 		if (error)
-			return (EXIT_FAILURE);
+			exit_error("Failure parsing file");
 	}
-	return (EXIT_SUCCESS);
 }
 
-int		read_file(const char *file_path, t_game *game)
+void			read_file(const char *file_path, t_game *game)
 {
-	int		error;
 	int		fd;
 
 	fd = open(file_path, O_RDONLY);
@@ -76,13 +74,8 @@ int		read_file(const char *file_path, t_game *game)
 		exit_error("Error opening file");
 	conf_init(&game->win, &game->textures, \
 				&game->player, &game->map);
-	error = parse_file(fd, game);
+	parse_file(fd, game);
 	close(fd);
-	if (!error)
-		error = make_grid(&game->map);
-	if (!error)
-		error = check_map(game->map, &game->player);
-	if (error)
-		exit_error("Map file invalid");
-	return (EXIT_SUCCESS);
+	make_grid(&game->map);
+	check_map(game->map, &game->player);
 }

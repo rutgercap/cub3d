@@ -6,11 +6,18 @@
 /*   By: rcappend <rcappend@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/03 07:01:24 by rcappend      #+#    #+#                 */
-/*   Updated: 2021/03/14 16:56:35 by rcappend      ########   odam.nl         */
+/*   Updated: 2021/03/25 12:25:39 by rcappend      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "engine.h"
+
+/*
+** Three steps for generating frames:
+** 1: Casting ray
+** 2: Drawing walls, floor and ceiling based on ray
+** 3: Drawing sprites if found
+*/
 
 static void		generate_image(t_game *game, t_image *img)
 {
@@ -29,43 +36,26 @@ static void		generate_image(t_game *game, t_image *img)
 		x++;
 	}
 	if (sprites_found > 0)
-		draw_sprites(img, *game, z_buffer);
+		draw_sprites(img, &game->map.sprites, *game, z_buffer);
 	mlx_put_image_to_window(game->win.mlx, game->win.win, img->img, 0, 0);
 }
 
-int		mlx_main_loop(t_game *game)
-{
-	static int 	update;
-	
-	update = 0;
+/*
+** Main Loop consists of checking for movement and then rendering next frame
+*/
+
+int				mlx_main_loop(t_game *game)
+{	
 	if (game->strafe != -1)
-	{
 		move_left_right(&game->player, game->strafe, game->map);
-		update = 1;
-	}
 	if (game->move != -1)
-	{
 		move_forward_backward(&game->player, game->move, game->map);
-		update = 1;
-	}
 	if (game->rotate != -1)
-	{
 		turn_right_left(&game->player, game->rotate);
-		update = 1;
-	}	
-	if (update == 1)
-	{
-		if (game->frame_counter % 2 == 0)
-		{
-			generate_image(game, &game->img_1);
-			update = 0;
-		}	
-		else
-		{
-			generate_image(game, &game->img_2);
-			update = 0;
-		}	
-	}	
+	if (game->frame_counter % 2 == 0)
+		generate_image(game, &game->img_1);
+	else
+		generate_image(game, &game->img_2);
 	game->frame_counter += 1;
 	return (EXIT_SUCCESS);
 }
