@@ -6,7 +6,7 @@
 #    By: rcappend <rcappend@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/01/18 13:39:03 by rcappend      #+#    #+#                  #
-#    Updated: 2021/03/23 11:51:07 by rcappend      ########   odam.nl          #
+#    Updated: 2021/04/26 15:16:25 by rcappend      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ SRCS		=	main.c \
 				./engine/sprite_utils.c
 OBJS		=	$(SRCS:.c=.o)
 
-LIBS		=	-Lmlx -lmlx -framework OpenGL -framework AppKit -lm
+LIBS		=	-L. -lmlx -framework OpenGL -framework AppKit -lm
 
 MLX			=	libmlx.dylib
 
@@ -39,7 +39,7 @@ CFLAGS		= 	-Wall -Wextra -fsanitize=address -g3 -I. # clean up
 
 all:		$(NAME)
 $(NAME):	$(MLX) $(OBJS)
-			gcc ${CFLAGS} ${LIBS} ${OBJS}  -o ${NAME}
+			$(CC) ${CFLAGS} ${LIBS} ${OBJS}  -o ${NAME}
 
 $(MLX):
 	@$(MAKE) -C mlx
