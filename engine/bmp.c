@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_tolower.c                                       :+:    :+:            */
+/*   bmp.c                                              :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: rcappend <rcappend@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/10/29 15:44:08 by rcappend      #+#    #+#                 */
-/*   Updated: 2020/10/29 15:44:09 by rcappend      ########   odam.nl         */
+/*   Created: 2021/04/30 13:37:41 by rcappend      #+#    #+#                 */
+/*   Updated: 2021/04/30 14:41:24 by rcappend      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_tolower(int c)
+#include "engine.h"
+
+void init_header(t_game *game)
 {
-	if (c >= 'A' && c <= 'Z')
-		c -= 'A' - 'a';
-	return (c);
+	
 }

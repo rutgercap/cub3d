@@ -6,13 +6,13 @@
 /*   By: rcappend <rcappend@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/12 12:48:07 by rcappend      #+#    #+#                 */
-/*   Updated: 2021/03/23 11:59:56 by rcappend      ########   odam.nl         */
+/*   Updated: 2021/04/29 11:07:12 by rcappend      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "engine.h"
 
-void		set_sprite_distance(t_sprite **head, const double pos_x, \
+void	set_sprite_distance(t_sprite **head, const double pos_x, \
 								const double pos_y)
 {
 	t_sprite	*current;
@@ -27,7 +27,7 @@ void		set_sprite_distance(t_sprite **head, const double pos_x, \
 	merge_sort_sprites(head);
 }
 
-void		set_transform(t_draw_spr *dst, const t_sprite sprite, \
+void	set_transform(t_draw_spr *dst, const t_sprite sprite, \
 							const t_player player, const int w)
 {
 	double		inv_det;
@@ -35,17 +35,17 @@ void		set_transform(t_draw_spr *dst, const t_sprite sprite, \
 	double		rel_y;
 
 	rel_x = sprite.x - player.x;
-	rel_y = sprite.y - player.y; 
+	rel_y = sprite.y - player.y;
 	inv_det = 1.0 / ((player.plane_x * player.dir_y) - \
 					(player.dir_x * player.plane_y));
 	dst->trans_x = inv_det * (player.dir_y * rel_x - \
 								player.dir_x * rel_y);
 	dst->trans_y = inv_det * (-player.plane_y * rel_x + \
 								player.plane_x * rel_y);
-	dst->sprite_x = (int)(w / 2.0) * (1.0 + dst->trans_x / dst->trans_y);
+	dst->sprite_x = (int)(w / 2.0) *(1.0 + dst->trans_x / dst->trans_y);
 }
 
-void 		set_draw_y(t_draw *draw, const int res_y, const double trans_y)
+void 	set_draw_y(t_draw *draw, const int res_y, const double trans_y)
 {
 	draw->length = (int)fabs(res_y / trans_y);
 	draw->draw_start = -draw->length / 2 + res_y / 2;
@@ -56,7 +56,7 @@ void 		set_draw_y(t_draw *draw, const int res_y, const double trans_y)
 		draw->draw_stop = res_y - 1;
 }
 
-void		set_draw_x(t_draw *draw, const t_mlx win, \
+void	set_draw_x(t_draw *draw, const t_mlx win, \
 						const double trans_y, const int sprite_x)
 {
 	draw->length = (int)fabs(win.res_y / trans_y);

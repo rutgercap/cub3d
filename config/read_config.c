@@ -6,13 +6,13 @@
 /*   By: rcappend <rcappend@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/18 18:00:26 by rcappend      #+#    #+#                 */
-/*   Updated: 2021/03/25 12:40:36 by rcappend      ########   odam.nl         */
+/*   Updated: 2021/04/26 15:54:34 by rcappend      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "config.h"
 
-static int		save_res(const char *line, t_mlx *win)
+static int	save_res(const char *line, t_mlx *win)
 {
 	while (ft_isspace(*line))
 		line++;
@@ -21,7 +21,7 @@ static int		save_res(const char *line, t_mlx *win)
 	win->res_x = ft_atoi(line);
 	while (ft_isdigit(*line))
 		line++;
-	while(ft_isspace(*line))
+	while (ft_isspace(*line))
 		line++;
 	if (!ft_isdigit(*line))
 		return (EXIT_FAILURE);
@@ -35,10 +35,10 @@ static int		save_res(const char *line, t_mlx *win)
 	return (EXIT_SUCCESS);
 }
 
-static int		save_texture_path(const char *line, char **dest)
+static int	save_texture_path(const char *line, char **dest)
 {
 	int		len;
-	
+
 	while (ft_isspace(*line))
 		line++;
 	len = ft_strlen(line);
@@ -51,7 +51,7 @@ static int		save_texture_path(const char *line, char **dest)
 	return (EXIT_SUCCESS);
 }
 
-static int		save_color(const char *line, int *dest)
+static int	save_color(const char *line, int *dest)
 {
 	int		r;
 	int		g;
@@ -80,8 +80,7 @@ static int		save_color(const char *line, int *dest)
 	return (EXIT_SUCCESS);
 }
 
-int				save_config(const char *line, t_game *game, \
-							t_textures *text, int *conf_n)
+int	save_config(const char *line, t_game *game, t_textures *text, int *conf_n)
 {
 	int		error;
 

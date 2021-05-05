@@ -6,7 +6,7 @@
 #    By: rcappend <rcappend@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/01/18 13:39:03 by rcappend      #+#    #+#                  #
-#    Updated: 2021/04/26 15:16:25 by rcappend      ########   odam.nl          #
+#    Updated: 2021/04/29 09:37:12 by rcappend      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,24 +47,6 @@ $(MLX):
 
 test: all
 	./$(NAME) maps/normal.cub
-
-simple: all
-	./$(NAME) maps/simple.cub
-
-simp: all
-	./$(NAME) maps/simp.cub
-
-sprite: all
-	./$(NAME) maps/sprites.cub
-
-dtest: all
-	lldb cub3d maps/normal.cub
-
-dsimple: all
-	lldb cub3d maps/simple.cub
-
-dsprite: all
-	lldb cub3d maps/sprites.cub
 
 clean:
 	@$(MAKE) -C mlx clean

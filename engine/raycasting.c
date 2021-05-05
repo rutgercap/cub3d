@@ -6,13 +6,13 @@
 /*   By: rcappend <rcappend@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/09 09:23:45 by rcappend      #+#    #+#                 */
-/*   Updated: 2021/03/22 12:39:42 by rcappend      ########   odam.nl         */
+/*   Updated: 2021/04/27 11:18:13 by rcappend      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "engine.h"
 
-static void		calc_dir_and_delta(t_ray *ray, const t_player player)
+static void	calc_dir_and_delta(t_ray *ray, const t_player player)
 {
 	ray->raydir_x = player.dir_x + player.plane_x * ray->camera_x;
 	ray->raydir_y = player.dir_y + player.plane_y * ray->camera_x;
@@ -32,7 +32,7 @@ static void		calc_dir_and_delta(t_ray *ray, const t_player player)
 		ray->deltadist_y = fabs(1 / ray->raydir_y);
 }
 
-static void		calc_side_dist(t_ray *ray, const t_player player)
+static void	calc_side_dist(t_ray *ray, const t_player player)
 {
 	if (ray->raydir_x < 0)
 	{
@@ -56,7 +56,7 @@ static void		calc_side_dist(t_ray *ray, const t_player player)
 	}
 }
 
-static void		cast_ray(t_ray *ray, const t_map map, int *sprites)
+static void	cast_ray(t_ray *ray, const t_map map, int *sprites)
 {
 	t_bool		hit;
 	char		found;
@@ -65,17 +65,17 @@ static void		cast_ray(t_ray *ray, const t_map map, int *sprites)
 	while (hit == FALSE)
 	{
 		if (ray->sidedist_x < ray->sidedist_y)
-        {
-          ray->sidedist_x += ray->deltadist_x;
-          ray->map_x += ray->step_x;
-          ray->side = 0;
-        }
-        else
-        {
-          ray->sidedist_y += ray->deltadist_y;
-          ray->map_y += ray->step_y;
-          ray->side = 1;
-        }
+		{
+			ray->sidedist_x += ray->deltadist_x;
+			ray->map_x += ray->step_x;
+			ray->side = 0;
+		}
+		else
+		{
+			ray->sidedist_y += ray->deltadist_y;
+			ray->map_y += ray->step_y;
+			ray->side = 1;
+		}
 		found = xy_to_map(ray->map_x, ray->map_y, map);
 		if (found == SPRITE)
 			*sprites += 1;
@@ -84,8 +84,8 @@ static void		cast_ray(t_ray *ray, const t_map map, int *sprites)
 	}
 }
 
-void			raycaster(t_ray *ray, const t_game game, \
-							int *sprites, double *distance)
+void	raycaster(t_ray *ray, const t_game game, \
+					int *sprites, double *distance)
 {
 	ray->camera_x = 2 * ray->x / (double)game.win.res_x - 1;
 	calc_dir_and_delta(ray, game.player);

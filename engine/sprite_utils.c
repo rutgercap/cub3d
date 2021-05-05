@@ -6,7 +6,7 @@
 /*   By: rcappend <rcappend@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/10 12:37:47 by rcappend      #+#    #+#                 */
-/*   Updated: 2021/03/25 12:17:01 by rcappend      ########   odam.nl         */
+/*   Updated: 2021/04/27 11:14:42 by rcappend      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ static void	front_back_split(t_sprite *source, t_sprite **frontref, \
 
 	slow = source;
 	fast = source->next;
-
 	while (fast != NULL)
 	{
 		fast = fast->next;
@@ -57,7 +56,7 @@ static t_sprite	*sorted_merge(t_sprite *a, t_sprite *b)
 	return (result);
 }
 
-void			merge_sort_sprites(t_sprite **head_ref)
+void	merge_sort_sprites(t_sprite **head_ref)
 {
 	t_sprite	*head;
 	t_sprite	*a;
@@ -67,19 +66,17 @@ void			merge_sort_sprites(t_sprite **head_ref)
 	if (head == NULL || head->next == NULL)
 		return ;
 	front_back_split(head, &a, &b);
-	
 	merge_sort_sprites(&a);
 	merge_sort_sprites(&b);
-
 	*head_ref = sorted_merge(a, b);
 }
 
-static void		add_sprite_front(t_sprite **head, const double x, \
+static void	add_sprite_front(t_sprite **head, const double x, \
 						const double y, const char type)
 {
 	t_sprite	*new;
 
-	new = (t_sprite*)malloc(sizeof(t_sprite));
+	new = (t_sprite *) malloc(sizeof(t_sprite));
 	if (!new)
 		exit_error("Error saving sprites");
 	new->x = x;
@@ -89,7 +86,7 @@ static void		add_sprite_front(t_sprite **head, const double x, \
 	*head = new;
 }
 
-void			save_sprites(t_sprite **sprite, t_map map)
+void	save_sprites(t_sprite **sprite, t_map map)
 {
 	t_sprite	*head;
 	char		type;
@@ -105,8 +102,8 @@ void			save_sprites(t_sprite **sprite, t_map map)
 		{
 			type = xy_to_map(x, y, map);
 			if (type == SPRITE)
-				add_sprite_front(&head, x + 0.5, y + 0.5, type);		
-			x--;	
+				add_sprite_front(&head, x + 0.5, y + 0.5, type);
+			x--;
 		}
 		y--;
 	}

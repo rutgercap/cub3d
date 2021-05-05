@@ -6,7 +6,7 @@
 /*   By: rcappend <rcappend@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/30 10:26:46 by rcappend      #+#    #+#                 */
-/*   Updated: 2021/01/18 17:38:55 by rcappend      ########   odam.nl         */
+/*   Updated: 2021/04/29 11:12:44 by rcappend      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	gnl_strjoin(char **line, char *buff)
 {
 	char	*new;
 	char	*index;
-	int		newl;
+	char	*newl;
 
 	if (ft_strclen(buff, 0) == 0)
 		return (0);
@@ -37,9 +37,11 @@ int	gnl_strjoin(char **line, char *buff)
 	index = gnl_memccpy(index, buff, '\n');
 	free(*line);
 	*line = new;
-	newl = ft_strchr(buff, '\n') == NULL ? 0 : 1;
+	newl = ft_strchr(buff, '\n');
 	gnl_buffmove(buff, index);
-	return (newl);
+	if (!newl)
+		return (0);
+	return (1);
 }
 
 int	get_next_line(int fd, char **line)

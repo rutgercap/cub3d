@@ -6,7 +6,7 @@
 /*   By: rcappend <rcappend@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/12 12:38:22 by rcappend      #+#    #+#                 */
-/*   Updated: 2021/03/25 12:46:32 by rcappend      ########   odam.nl         */
+/*   Updated: 2021/04/30 12:43:37 by rcappend      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static t_draw	set_draw_wall(const t_ray ray, const int res_y, const int x)
 {
 	t_draw	draw;
-	
+
 	draw.x = x;
 	if (ray.distance == 0)
 		draw.length = res_y;
@@ -30,7 +30,7 @@ static t_draw	set_draw_wall(const t_ray ray, const int res_y, const int x)
 	return (draw);
 }
 
-static void		draw_ceiling_floor(t_image *img, const t_textures texts, \
+static void	draw_ceiling_floor(t_image *img, const t_textures texts, \
 									const t_draw draw, const int res_y)
 {
 	int		y;
@@ -50,22 +50,21 @@ static void		draw_ceiling_floor(t_image *img, const t_textures texts, \
 }
 
 static t_text	get_text(const t_textures texts, const int side, \
-							const double dir_x, const double dir_y)
+						const double dir_x, const double dir_y)
 {
 	if (side)
 		if (dir_y < 0)
 			return (texts.no_text);
-		else
-			return (texts.so_text);
+	else
+		return (texts.so_text);
 	else
 		if (dir_x < 0)
 			return (texts.we_text);
-		else
-			return (texts.ea_text);
+	else
+		return (texts.ea_text);
 }
 
-static int		get_tex_x(const t_text text, const t_game game, \
-							const t_ray ray)
+static int	get_tex_x(const t_text text, const t_game game, const t_ray ray)
 {
 	double	wall_x;
 	int		tex_x;
@@ -83,33 +82,29 @@ static int		get_tex_x(const t_text text, const t_game game, \
 	return (tex_x);
 }
 
-void			draw_room(t_image *img, const t_game game, \
-							const t_ray ray)
+void	draw_room(t_image *img, const t_game game, const t_ray ray)
 {
+	t_wall			wall;
 	t_draw			draw;
 	t_text			text;
-	int				y;
-	int				tex_x;
-	int				tex_y;
-	double			step;
 	char			*dest;
 	unsigned int	color;
-	double			tex_pos;
 
 	draw = set_draw_wall(ray, game.win.res_y, ray.x);
 	draw_ceiling_floor(img, game.textures, draw, game.win.res_y);
 	text = get_text(game.textures, ray.side, ray.raydir_x, ray.raydir_y);
-	tex_x = get_tex_x(text, game, ray);
-	step = 1.0 * text.height / draw.length;
-	tex_pos = (draw.draw_start - game.win.res_y / 2 + draw.length / 2) * step;
-	y = draw.draw_start;
-	while (y < draw.draw_stop)
+	wall.tex_x = get_tex_x(text, game, ray);
+	wall.step = 1.0 * text.height / draw.length;
+	wall.tex_pos = (draw.draw_start - game.win.res_y / \
+					2 + draw.length / 2) * wall.step;
+	while (draw.draw_start < draw.draw_stop)
 	{
-		tex_y = (int)tex_pos & (text.height - 1);
-		tex_pos += step;
-		dest = text.addr + (tex_y * text.line_len + tex_x * (text.bpp / 8));
-		color = *(unsigned int*)dest;
-		my_mlx_pixel_put(img, ray.x, y, color);
-		y++;
+		wall.tex_y = (int)wall.tex_pos & (text.height - 1);
+		wall.tex_pos += wall.step;
+		dest = text.addr + (wall.tex_y * text.line_len + \
+				wall.tex_x * (text.bpp / 8));
+		color = *(unsigned int *)dest;
+		my_mlx_pixel_put(img, ray.x, draw.draw_start, color);
+		draw.draw_start++;
 	}
 }

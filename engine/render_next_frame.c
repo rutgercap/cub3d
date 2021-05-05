@@ -6,7 +6,7 @@
 /*   By: rcappend <rcappend@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/03 07:01:24 by rcappend      #+#    #+#                 */
-/*   Updated: 2021/03/25 12:25:39 by rcappend      ########   odam.nl         */
+/*   Updated: 2021/04/30 13:25:41 by rcappend      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,18 @@
 ** 3: Drawing sprites if found
 */
 
-static void		generate_image(t_game *game, t_image *img)
+static void	generate_image(t_game *game, t_image *img)
 {
 	t_ray		ray;
 	int			sprites_found;
-	double		z_buffer[game->win.res_x];
+	double		*z_buffer;
 	int			x;
 
 	x = 0;
 	sprites_found = 0;
+	z_buffer = (double *) ft_calloc(game->win.res_x, sizeof(double));
+	if (!z_buffer)
+		exit_error("Malloc error");
 	while (x < game->win.res_x)
 	{
 		ray.x = x;
@@ -44,7 +47,7 @@ static void		generate_image(t_game *game, t_image *img)
 ** Main Loop consists of checking for movement and then rendering next frame
 */
 
-int				mlx_main_loop(t_game *game)
+int	mlx_main_loop(t_game *game)
 {	
 	if (game->strafe != -1)
 		move_left_right(&game->player, game->strafe, game->map);
@@ -53,7 +56,9 @@ int				mlx_main_loop(t_game *game)
 	if (game->rotate != -1)
 		turn_right_left(&game->player, game->rotate);
 	if (game->frame_counter % 2 == 0)
+	{
 		generate_image(game, &game->img_1);
+	}	
 	else
 		generate_image(game, &game->img_2);
 	game->frame_counter += 1;

@@ -6,13 +6,13 @@
 /*   By: rcappend <rcappend@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/22 07:59:52 by rcappend      #+#    #+#                 */
-/*   Updated: 2021/03/25 12:00:24 by rcappend      ########   odam.nl         */
+/*   Updated: 2021/04/26 15:53:38 by rcappend      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "config.h"
 
-void			make_grid(t_map *map)
+void	make_grid(t_map *map)
 {
 	char	**temp;
 	int		i;
@@ -40,7 +40,7 @@ void			make_grid(t_map *map)
 	map->map = temp;
 }
 
-static char		**add_to_map(char **map, const char *line, int n)
+static char	**add_to_map(char **map, const char *line, int n)
 {
 	char	**temp;
 
@@ -61,7 +61,7 @@ static char		**add_to_map(char **map, const char *line, int n)
 	return (temp);
 }
 
-int				save_map(const char *line, t_map *map, int *conf_n)
+int	save_map(const char *line, t_map *map, int *conf_n)
 {
 	char	**temp;
 	int		i;

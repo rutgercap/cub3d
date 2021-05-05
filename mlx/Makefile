@@ -21,6 +21,8 @@ all: $(NAME)
 $(NAME): $(MODULE_OBJ) $(OBJ) $(C_OBJ)
 	swiftc $(OPTI) $(INC) -o $(NAME) -emit-library $(OBJ) $(C_OBJ) -lz
 
+
+
 %.o: %.swift
 	swiftc $(OPTI) $(INC) -parse-as-library -c $< -o $@
 
@@ -29,3 +31,4 @@ $(NAME): $(MODULE_OBJ) $(OBJ) $(C_OBJ)
 
 clean:
 	rm -f $(NAME) $(OBJ) $(MODULE_OBJ) $(C_OBJ) *.swiftdoc *~
+

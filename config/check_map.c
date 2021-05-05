@@ -6,7 +6,7 @@
 /*   By: rcappend <rcappend@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/23 11:29:50 by rcappend      #+#    #+#                 */
-/*   Updated: 2021/03/25 12:02:54 by rcappend      ########   odam.nl         */
+/*   Updated: 2021/04/26 15:51:31 by rcappend      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 ** walled off properly.
 */
 
-static int		compare(t_bool *correct, const char current, const char next)
+static int	compare(t_bool *correct, const char current, const char next)
 {
 	if (ft_strchr(" 012NESW", current) == NULL)
 		return (EXIT_FAILURE);
@@ -33,7 +33,7 @@ static int		compare(t_bool *correct, const char current, const char next)
 	return (EXIT_SUCCESS);
 }
 
-static int		check_hor(t_map map)
+static int	check_hor(t_map map)
 {
 	t_bool	correct;
 	int		x;
@@ -56,7 +56,7 @@ static int		check_hor(t_map map)
 	return (EXIT_SUCCESS);
 }
 
-static int		check_vert(t_map map)
+static int	check_vert(t_map map)
 {
 	t_bool	correct;
 	int		y;
@@ -79,7 +79,7 @@ static int		check_vert(t_map map)
 	return (EXIT_SUCCESS);
 }
 
-static void		check_start_pos(t_map map, t_player *player)
+static void	check_start_pos(t_map map, t_player *player)
 {
 	int		x;
 
@@ -105,11 +105,10 @@ static void		check_start_pos(t_map map, t_player *player)
 	}
 }
 
-void			check_map(const t_map map, t_player *player)
+void	check_map(const t_map map, t_player *player)
 {
 	check_hor(map);
 	check_vert(map);
-	
 	check_start_pos(map, player);
 	if (player->dir_x == 'N' || player->dir_x == 'E')
 		north_east_to_dir(player);

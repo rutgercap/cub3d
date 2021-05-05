@@ -6,18 +6,18 @@
 /*   By: rcappend <rcappend@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/11 10:32:16 by rcappend      #+#    #+#                 */
-/*   Updated: 2021/02/17 16:21:01 by rcappend      ########   odam.nl         */
+/*   Updated: 2021/04/29 12:11:27 by rcappend      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#	ifndef UTILS_H
-#	define UTILS_H
+#ifndef UTILS_H
+# define UTILS_H
 
-#include <unistd.h>
+# include <unistd.h>
 
-#include <stdlib.h>
+# include <stdlib.h>
 
-typedef enum
+typedef enum e_bool
 {
 	FALSE,
 	TRUE
@@ -43,7 +43,7 @@ void				ft_putnbr_fd(int n, int fd);
 
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 
-char				*ft_strnstr(const char *haystack, const char
+char				*ft_strnstr(const char *haystack, const char \
 					*needle, size_t len);
 
 char				*ft_strchr(const char *s, int c);
@@ -61,10 +61,6 @@ int					ft_isalpha(int c);
 int					ft_isdigit(int c);
 
 int					ft_isprint(int c);
-
-int					ft_tolower(int c);
-
-int					ft_toupper(int c);
 
 void				ft_putchar_fd(char c, int fd);
 
@@ -106,4 +102,4 @@ char				*ft_itoa_base(unsigned int n, char *base);
 
 int					create_trgb(int t, int r, int g, int b);
 
-#	endif
+#endif

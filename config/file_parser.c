@@ -6,13 +6,13 @@
 /*   By: rcappend <rcappend@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/21 16:53:58 by rcappend      #+#    #+#                 */
-/*   Updated: 2021/03/25 12:03:40 by rcappend      ########   odam.nl         */
+/*   Updated: 2021/04/26 15:52:29 by rcappend      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "config.h"
 
-static void		conf_init(t_mlx *win, t_textures *text, \
+static void	conf_init(t_mlx *win, t_textures *text, \
 							t_player *player, t_map *map)
 {
 	win->res_x = -1;
@@ -38,7 +38,7 @@ static void		conf_init(t_mlx *win, t_textures *text, \
 ** next lines are sent to be saved in the map
 */
 
-static void		parse_file(const int fd, t_game *game)
+static void	parse_file(const int fd, t_game *game)
 {
 	char	*buff;
 	int		start;
@@ -52,7 +52,7 @@ static void		parse_file(const int fd, t_game *game)
 	{
 		start = get_next_line(fd, &buff);
 		if (start < 0)
-			exit_error("GNL Failure");
+			exit_error("Error reading file");
 		if (conf_n <= 8 && *buff != '\0')
 			error = save_config(buff, game, &game->textures, &conf_n);
 		else if (conf_n == 8 && *buff != '\0')
@@ -61,11 +61,11 @@ static void		parse_file(const int fd, t_game *game)
 			error = save_map(buff, &game->map, &conf_n);
 		free(buff);
 		if (error)
-			exit_error("Failure parsing file");
+			exit_error("Error reading file");
 	}
 }
 
-void			read_file(const char *file_path, t_game *game)
+void	read_file(const char *file_path, t_game *game)
 {
 	int		fd;
 

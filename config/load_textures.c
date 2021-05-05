@@ -6,33 +6,33 @@
 /*   By: rcappend <rcappend@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/22 11:13:02 by rcappend      #+#    #+#                 */
-/*   Updated: 2021/03/25 12:13:44 by rcappend      ########   odam.nl         */
+/*   Updated: 2021/04/26 15:53:21 by rcappend      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "config.h"
 
 // fix png leaks or remove
-static int		get_image(t_text *tex, void *mlx_ptr)
+static int	get_image(t_text *tex, void *mlx_ptr)
 {
 	int		len;
-	
+
 	len = ft_strlen(tex->path);
 	if (ft_strncmp(tex->path + len - 4, ".png", 4) == 0)
-		tex->img = mlx_png_file_to_image(mlx_ptr, tex->path,\
+		tex->img = mlx_png_file_to_image(mlx_ptr, tex->path, \
 		&tex->width, &tex->height);
 	else
-		tex->img = mlx_xpm_file_to_image(mlx_ptr, tex->path,\
+		tex->img = mlx_xpm_file_to_image(mlx_ptr, tex->path, \
 		&tex->width, &tex->height);
 	free(tex->path);
 	if (!tex->img)
 		return (EXIT_FAILURE);
-	tex->addr = mlx_get_data_addr(tex->img, &tex->bpp, &tex->line_len,\
+	tex->addr = mlx_get_data_addr(tex->img, &tex->bpp, &tex->line_len, \
 				&tex->endian);
 	return (EXIT_SUCCESS);
 }
 
-void			load_textures(t_textures *texts, void *mlx_ptr)
+void	load_textures(t_textures *texts, void *mlx_ptr)
 {
 	int		error;
 

@@ -6,13 +6,13 @@
 /*   By: rcappend <rcappend@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/02 10:12:58 by rcappend      #+#    #+#                 */
-/*   Updated: 2021/03/15 13:23:35 by rcappend      ########   odam.nl         */
+/*   Updated: 2021/04/30 13:16:38 by rcappend      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "engine.h"
 
-int		key_press(const int keycode, t_game *game)
+int	key_press(const int keycode, t_game *game)
 {
 	if (keycode == KEY_W)
 		game->move = KEY_W;
@@ -26,10 +26,12 @@ int		key_press(const int keycode, t_game *game)
 		game->rotate = KEY_LEFT;
 	if (keycode == KEY_RIGHT)
 		game->rotate = KEY_RIGHT;
+	if (keycode == KEY_ESCAPE)
+		exit(EXIT_SUCCESS);
 	return (EXIT_SUCCESS);
 }
 
-int		key_release(const int keycode, t_game *game)
+int	key_release(const int keycode, t_game *game)
 {
 	if (keycode == KEY_W)
 		game->move = -1;
@@ -49,7 +51,7 @@ int		key_release(const int keycode, t_game *game)
 void	move_forward_backward(t_player *player, const int key, const t_map map)
 {
 	double	move_speed;
-	
+
 	move_speed = player->move_speed;
 	if (key == KEY_W)
 	{
@@ -74,7 +76,7 @@ void	move_forward_backward(t_player *player, const int key, const t_map map)
 void	move_left_right(t_player *player, const int key, const t_map map)
 {
 	double	move_speed;
-	
+
 	move_speed = player->move_speed;
 	if (key == KEY_D)
 	{
@@ -87,7 +89,7 @@ void	move_left_right(t_player *player, const int key, const t_map map)
 	}
 	else
 	{
-		if (xy_to_map(player->x - player->plane_x * move_speed , \
+		if (xy_to_map(player->x - player->plane_x * move_speed, \
 									player->y, map) != '1')
 			player->x -= player->plane_x * move_speed;
 		if (xy_to_map(player->x, player->y - \
@@ -98,25 +100,27 @@ void	move_left_right(t_player *player, const int key, const t_map map)
 
 void	turn_right_left(t_player *player, const int key)
 {
-	double	old_dir;
-	double	old_plane;
 	double	speed;
 
 	speed = player->rot_speed;
-	old_dir = player->dir_x;
-	old_plane = player->plane_x;
 	if (key == KEY_LEFT)
 	{
-		player->dir_x = player->dir_x * cos(-speed) - player->dir_y * sin(-speed);
-		player->dir_y = old_dir * sin(-speed) + player->dir_y * cos(-speed);
-		player->plane_x = player->plane_x * cos(-speed) - player->plane_y * sin(-speed);
-		player->plane_y = old_plane * sin(-speed) + player->plane_y * cos(-speed);
+		player->dir_x = player->dir_x * cos(-speed) \
+		- player->dir_y * sin(-speed);
+		player->dir_y = player->dir_x * sin(-speed) \
+		+ player->dir_y * cos(-speed);
+		player->plane_x = player->plane_x * cos(-speed) \
+		- player->plane_y * sin(-speed);
+		player->plane_y = player->plane_x * sin(-speed) \
+		+ player->plane_y * cos(-speed);
 	}
 	else
 	{
 		player->dir_x = player->dir_x * cos(speed) - player->dir_y * sin(speed);
-		player->dir_y = old_dir * sin(speed) + player->dir_y * cos(speed);
-		player->plane_x = player->plane_x * cos(speed) - player->plane_y * sin(speed);
-		player->plane_y = old_plane * sin(speed) + player->plane_y * cos(speed);
+		player->dir_y = player->dir_x * sin(speed) + player->dir_y * cos(speed);
+		player->plane_x = player->plane_x * cos(speed) \
+		- player->plane_y * sin(speed);
+		player->plane_y = player->plane_x * sin(speed) \
+		+ player->plane_y * cos(speed);
 	}
 }

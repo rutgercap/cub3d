@@ -6,13 +6,13 @@
 /*   By: rcappend <rcappend@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/24 16:48:38 by rcappend      #+#    #+#                 */
-/*   Updated: 2021/03/25 09:34:36 by rcappend      ########   odam.nl         */
+/*   Updated: 2021/04/26 15:52:04 by rcappend      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "config.h"
 
-int		xy_to_map(const int x, const int y, const t_map map)
+int	xy_to_map(const int x, const int y, const t_map map)
 {
 	if (x < 1 || x > map.width || y < 1 || y > map.height)
 		return (OPEN);
