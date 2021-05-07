@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   init.c                                             :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: rcappend <rcappend@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2021/01/31 12:32:25 by rcappend      #+#    #+#                 */
-/*   Updated: 2021/04/30 13:03:25 by rcappend      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rutgercappendijk <rutgercappendijk@stud    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/01/31 12:32:25 by rcappend          #+#    #+#             */
+/*   Updated: 2021/05/06 12:28:49 by rutgercappe      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,6 @@ static void	init_window(t_mlx *win)
 	int		screen_x;
 	int		screen_y;
 
-	win->mlx = mlx_init();
-	if (!win->mlx)
-		exit_error("Failed to initialise window");
 	mlx_get_screen_size(win->mlx, &screen_x, &screen_y);
 	if (win->res_x > screen_x)
 		win->res_x = screen_x;
@@ -52,6 +49,9 @@ void	set_struct_values(t_game *game)
 
 void	init_mlx(t_game *game)
 {
+	game->win.mlx = mlx_init();
+	if (!game->win.mlx)
+		exit_error("Failed to initialise window");
 	if (game->save == FALSE)
 		init_window(&game->win);
 	init_image(&game->img_1, &game->win);

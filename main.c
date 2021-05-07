@@ -44,15 +44,11 @@ static void	start_game(t_game *game)
 	mlx_loop(game->win.mlx);
 }
 
-static void	save_bmp(t_game *game)
-{
-	
-}
-
 int	main(int argc, char **argv)
 {
 	t_game		game;
 
+	game.save = FALSE;
 	if (argc == 1)
 		return (exit_error("No map provided"));
 	else if (argc > 3)

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   read_config.c                                      :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: rcappend <rcappend@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2021/01/18 18:00:26 by rcappend      #+#    #+#                 */
-/*   Updated: 2021/04/26 15:54:34 by rcappend      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   read_config.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rutgercappendijk <rutgercappendijk@stud    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/01/18 18:00:26 by rcappend          #+#    #+#             */
+/*   Updated: 2021/05/07 10:47:18 by rutgercappe      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,17 @@ static int	save_texture_path(const char *line, char **dest)
 	return (EXIT_SUCCESS);
 }
 
-static int	save_color(const char *line, int *dest)
+static int	save_color(int *dest, char *line)
+{
+	if (!ft_isdigit(*line))
+		return (EXIT_FAILURE);
+	*dest = ft_atoi(line);
+	if (*dest > 255)
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
+}
+
+static int	save_rgb(const char *line, int *dest)
 {
 	int		r;
 	int		g;
@@ -59,26 +69,57 @@ static int	save_color(const char *line, int *dest)
 
 	while (ft_isspace(*line))
 		line++;
-	if (!ft_isdigit(*line))
+	if (save_color(&r, line))
 		return (EXIT_FAILURE);
-	r = ft_atoi(line);
 	while (ft_isdigit(*line))
 		line++;
 	if (*line == ',')
 		line++;
-	if (!ft_isdigit(*line))
+	if (save_color(&g, line))
 		return (EXIT_FAILURE);
-	g = ft_atoi(line);
 	while (ft_isdigit(*line))
 		line++;
 	if (*line == ',')
 		line++;
-	if (!ft_isdigit(*line))
+	if (save_color(&b, line))
 		return (EXIT_FAILURE);
-	b = ft_atoi(line);
+	while (ft_isdigit(*line))
+		line++;
+	if (*line != '\0')
+		return (EXIT_FAILURE);
 	*dest = create_trgb(0, r, g, b);
 	return (EXIT_SUCCESS);
 }
+
+// static int	save_rgb(const char *line, int *dest)
+// {
+// 	int		r;
+// 	int		g;
+// 	int		b;
+
+// 	while (ft_isspace(*line))
+// 		line++;
+// 	if (!ft_isdigit(*line))
+// 		return (EXIT_FAILURE);
+// 	r = ft_atoi(line);
+// 	while (ft_isdigit(*line))
+// 		line++;
+// 	if (*line == ',')
+// 		line++;
+// 	if (!ft_isdigit(*line))
+// 		return (EXIT_FAILURE);
+// 	g = ft_atoi(line);
+// 	while (ft_isdigit(*line))
+// 		line++;
+// 	if (*line == ',')
+// 		line++;
+// 	if (!ft_isdigit(*line))
+// 		return (EXIT_FAILURE);
+// 	b = ft_atoi(line);
+// 	*dest = create_trgb(0, r, g, b);
+
+// 	return (EXIT_SUCCESS);
+// }
 
 int	save_config(const char *line, t_game *game, t_textures *text, int *conf_n)
 {
@@ -100,9 +141,9 @@ int	save_config(const char *line, t_game *game, t_textures *text, int *conf_n)
 	else if (text->spr_text.path == NULL && ft_strncmp(line, "S ", 2) == 0)
 		error = save_texture_path(line + 2, &text->spr_text.path);
 	else if (text->f_col == -1 && ft_strncmp(line, "F ", 2) == 0)
-		error = save_color(line + 2, &text->f_col);
+		error = save_rgb(line + 2, &text->f_col);
 	else if (text->c_col == -1 && ft_strncmp(line, "C ", 2) == 0)
-		error = save_color(line + 2, &text->c_col);
+		error = save_rgb(line + 2, &text->c_col);
 	if (error == EXIT_SUCCESS)
 		*conf_n += 1;
 	return (error);

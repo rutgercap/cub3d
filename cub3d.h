@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   cub3d.h                                            :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: rcappend <rcappend@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2021/01/18 18:15:11 by rcappend      #+#    #+#                 */
-/*   Updated: 2021/04/30 13:03:35 by rcappend      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rutgercappendijk <rutgercappendijk@stud    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/01/18 18:15:11 by rcappend          #+#    #+#             */
+/*   Updated: 2021/05/05 13:26:33 by rutgercappe      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#	ifndef CUB3D_H
-#	define CUB3D_H
+#ifndef CUB3D_H
+# define CUB3D_H
 
-#include "utils/utils.h"
-#include <mlx/mlx.h>
-#include <stdio.h>
+# include "utils/utils.h"
+# include <fcntl.h>
+# include <mlx/mlx.h>
+# include <stdio.h>
 
 # define FLOOR 48
 # define WALL 49
@@ -24,10 +25,6 @@
 
 # define X_EVENT_KEY_PRESS		2
 # define X_EVENT_KEY_RELEASE	3
-// # define X_EVENT_MOUSE_PRESS	4
-// # define X_EVENT_MOUSE_RELEASE	5
-// # define X_EVENT_MOUSE_MOVE		6
-// # define X_EVENT_EXIT			17
 
 /*
 **  sprite list struct
@@ -138,4 +135,8 @@ int		mlx_main_loop(t_game *game);
 
 void	set_struct_values(t_game *game);
 
-#	endif
+void	generate_image(t_game *game, t_image *img);
+
+void	save_bmp(t_game *game);
+
+#endif

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   render_next_frame.c                                :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: rcappend <rcappend@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2021/02/03 07:01:24 by rcappend      #+#    #+#                 */
-/*   Updated: 2021/04/30 13:25:41 by rcappend      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   render_next_frame.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rutgercappendijk <rutgercappendijk@stud    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/02/03 07:01:24 by rcappend          #+#    #+#             */
+/*   Updated: 2021/05/06 11:47:02 by rutgercappe      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 ** 3: Drawing sprites if found
 */
 
-static void	generate_image(t_game *game, t_image *img)
+void	generate_image(t_game *game, t_image *img)
 {
 	t_ray		ray;
 	int			sprites_found;
@@ -40,7 +40,6 @@ static void	generate_image(t_game *game, t_image *img)
 	}
 	if (sprites_found > 0)
 		draw_sprites(img, &game->map.sprites, *game, z_buffer);
-	mlx_put_image_to_window(game->win.mlx, game->win.win, img->img, 0, 0);
 }
 
 /*
@@ -58,9 +57,13 @@ int	mlx_main_loop(t_game *game)
 	if (game->frame_counter % 2 == 0)
 	{
 		generate_image(game, &game->img_1);
-	}	
+		mlx_put_image_to_window(game->win.mlx, game->win.win, game->img_1.img, 0, 0);
+	}
 	else
+	{
 		generate_image(game, &game->img_2);
+		mlx_put_image_to_window(game->win.mlx, game->win.win, game->img_2.img, 0, 0);
+	}
 	game->frame_counter += 1;
 	return (EXIT_SUCCESS);
 }

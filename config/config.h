@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   config.h                                           :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: rcappend <rcappend@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2021/01/18 18:13:38 by rcappend      #+#    #+#                 */
-/*   Updated: 2021/04/26 15:50:59 by rcappend      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   config.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rutgercappendijk <rutgercappendijk@stud    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/01/18 18:13:38 by rcappend          #+#    #+#             */
+/*   Updated: 2021/05/07 10:41:51 by rutgercappe      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,24 +28,6 @@ typedef struct s_pos
 	int			y;
 	char		dir;
 }				t_pos;
-
-typedef struct s_conf
-{
-	int			res_x;
-	int			res_y;
-	char		*so_path;
-	char		*we_path;
-	char		*ea_path;
-	char		*spr_path;
-	int			f_col;
-	int			c_col;
-	char		**map;
-	int			width;
-	int			height;
-	t_pos		start_pos;
-}				t_conf;
-
-void			free_conf(t_conf *conf);
 
 int				save_config(const char *line, t_game *game, \
 				t_textures *text, int *conf_n);

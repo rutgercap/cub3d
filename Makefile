@@ -12,7 +12,7 @@
 
 NAME		=	cub3D
 
-SRCS		=	main.c \
+SRCS		=	main.c bmp.c \
 				./utils/ft_strchr.c ./utils/ft_strlen.c ./utils/ft_atoi.c \
 				./utils/ft_isdigit.c ./utils/ft_strncmp.c ./utils/ft_substr.c \
 				./utils/ft_calloc.c ./utils/ft_isspace.c ./utils/ft_memcpy.c \
@@ -35,7 +35,7 @@ MLX			=	libmlx.dylib
 
 CC			=	gcc
 
-CFLAGS		= 	-Wall -Wextra -fsanitize=address -g3 -I. # clean up
+CFLAGS		= 	-Wall -Wextra -g3 -I. # clean up
 
 all:		$(NAME)
 $(NAME):	$(MLX) $(OBJS)
@@ -47,6 +47,15 @@ $(MLX):
 
 test: all
 	./$(NAME) maps/normal.cub
+
+save: all
+	./$(NAME) maps/normal.cub --save
+
+dtest: all
+	lldb $(NAME) -- maps/normal.cub
+
+dsave: all
+	lldb $(NAME) -- maps/normal.cub --save
 
 clean:
 	@$(MAKE) -C mlx clean
