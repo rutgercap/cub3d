@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   draw_sprites.c                                     :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: rcappend <rcappend@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2021/03/12 10:18:26 by rcappend      #+#    #+#                 */
-/*   Updated: 2021/04/29 11:45:41 by rcappend      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   draw_sprites.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rutgercappendijk <rutgercappendijk@stud    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/12 10:18:26 by rcappend          #+#    #+#             */
+/*   Updated: 2021/05/14 10:41:58 by rutgercappe      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ static void	draw_sprite_y(t_image *img, t_draw_spr dr_sp, \
 							const int res_y, const int x)
 {
 	t_draw			draw_y;
-	t_draw			draw_x;
+	// t_draw			draw_x;
 	char			*dest;
 	unsigned int	color;
 	int				d;
 
 	draw_y = dr_sp.draw_y;
-	draw_x = dr_sp.draw_x;
+	// draw_x = dr_sp.draw_x;
 	while (draw_y.draw_start < draw_y.draw_stop)
 	{
 		d = draw_y.draw_start * 256 - res_y * 128 + draw_y.length * 128;
@@ -68,7 +68,7 @@ void	draw_sprites(t_image *img, t_sprite **head, \
 			dr_sp.tex_x = (int)(256 * (x - (-dr_sp.draw_x.length / 2 + \
 				dr_sp.sprite_x)) * dr_sp.text.width / \
 				dr_sp.draw_x.length) / 256;
-			if (dr_sp.trans_y > 0 && x > 0 && x < game.win.res_x && \
+			if (dr_sp.trans_y > 0 && x >= 0 && x < game.win.res_x && \
 					dr_sp.trans_y < z_buffer[x])
 				draw_sprite_y(img, dr_sp, game.win.res_y, x);
 			x++;

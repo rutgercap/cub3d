@@ -6,7 +6,7 @@
 /*   By: rutgercappendijk <rutgercappendijk@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 18:13:38 by rcappend          #+#    #+#             */
-/*   Updated: 2021/05/07 10:41:51 by rutgercappe      ###   ########.fr       */
+/*   Updated: 2021/05/12 15:02:13 by rutgercappe      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct s_pos
 	char		dir;
 }				t_pos;
 
-int				save_config(const char *line, t_game *game, \
+int				save_config(char *line, t_game *game, \
 				t_textures *text, int *conf_n);
 
 int				save_map(const char *line, t_map *map, int *conf_n);

@@ -6,7 +6,7 @@
 /*   By: rutgercappendijk <rutgercappendijk@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 18:00:26 by rcappend          #+#    #+#             */
-/*   Updated: 2021/05/07 10:47:18 by rutgercappe      ###   ########.fr       */
+/*   Updated: 2021/05/12 16:20:47 by rutgercappe      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static int	save_color(int *dest, char *line)
 	return (EXIT_SUCCESS);
 }
 
-static int	save_rgb(const char *line, int *dest)
+static int	save_rgb(char *line, int *dest)
 {
 	int		r;
 	int		g;
@@ -91,58 +91,28 @@ static int	save_rgb(const char *line, int *dest)
 	return (EXIT_SUCCESS);
 }
 
-// static int	save_rgb(const char *line, int *dest)
-// {
-// 	int		r;
-// 	int		g;
-// 	int		b;
-
-// 	while (ft_isspace(*line))
-// 		line++;
-// 	if (!ft_isdigit(*line))
-// 		return (EXIT_FAILURE);
-// 	r = ft_atoi(line);
-// 	while (ft_isdigit(*line))
-// 		line++;
-// 	if (*line == ',')
-// 		line++;
-// 	if (!ft_isdigit(*line))
-// 		return (EXIT_FAILURE);
-// 	g = ft_atoi(line);
-// 	while (ft_isdigit(*line))
-// 		line++;
-// 	if (*line == ',')
-// 		line++;
-// 	if (!ft_isdigit(*line))
-// 		return (EXIT_FAILURE);
-// 	b = ft_atoi(line);
-// 	*dest = create_trgb(0, r, g, b);
-
-// 	return (EXIT_SUCCESS);
-// }
-
-int	save_config(const char *line, t_game *game, t_textures *text, int *conf_n)
+int	save_config(char *line, t_game *game, t_textures *text, int *conf_n)
 {
 	int		error;
 
 	error = EXIT_FAILURE;
 	if (*conf_n == 8)
 		error = EXIT_SUCCESS;
-	else if (game->win.res_x == -1 && ft_strncmp(line, "R ", 2) == 0)
+	else if (game->win.res_x == -1 && !ft_strncmp(line, "R ", 2))
 		error = save_res(line + 2, &game->win);
-	else if (text->no_text.path == NULL && ft_strncmp(line, "NO ", 3) == 0)
+	else if (text->no_text.path == NULL && !ft_strncmp(line, "NO ", 3))
 		error = save_texture_path(line + 3, &text->no_text.path);
-	else if (text->so_text.path == NULL && ft_strncmp(line, "SO ", 3) == 0)
+	else if (text->so_text.path == NULL && !ft_strncmp(line, "SO ", 3))
 		error = save_texture_path(line + 3, &text->so_text.path);
-	else if (text->we_text.path == NULL && ft_strncmp(line, "WE ", 3) == 0)
+	else if (text->we_text.path == NULL && !ft_strncmp(line, "WE ", 3))
 		error = save_texture_path(line + 3, &text->we_text.path);
-	else if (text->ea_text.path == NULL && ft_strncmp(line, "EA ", 3) == 0)
+	else if (text->ea_text.path == NULL && !ft_strncmp(line, "EA ", 3))
 		error = save_texture_path(line + 3, &text->ea_text.path);
-	else if (text->spr_text.path == NULL && ft_strncmp(line, "S ", 2) == 0)
+	else if (text->spr_text.path == NULL && !ft_strncmp(line, "S ", 2))
 		error = save_texture_path(line + 2, &text->spr_text.path);
-	else if (text->f_col == -1 && ft_strncmp(line, "F ", 2) == 0)
+	else if (text->f_col == -1 && !ft_strncmp(line, "F ", 2))
 		error = save_rgb(line + 2, &text->f_col);
-	else if (text->c_col == -1 && ft_strncmp(line, "C ", 2) == 0)
+	else if (text->c_col == -1 && !ft_strncmp(line, "C ", 2))
 		error = save_rgb(line + 2, &text->c_col);
 	if (error == EXIT_SUCCESS)
 		*conf_n += 1;

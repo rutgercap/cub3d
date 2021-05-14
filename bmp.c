@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   bmp.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rutgercappendijk <rutgercappendijk@stud    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/12 15:00:22 by rutgercappe       #+#    #+#             */
+/*   Updated: 2021/05/14 10:22:27 by rutgercappe      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "cub3d.h"
 
@@ -30,19 +41,33 @@ static void write_bmp_header(const int fd, const int size, \
 		exit_error("Write error");
 }
 
+// static int	get_color(t_mlx *win, t_image img, const int x, const int y)
+// {
+// 	int	rgb;
+// 	int	color;
+
+// 	color = *(int *)(img.addr + \
+// 					(4 * win->res_x * (win->res_y - y)) + \
+// 					(4 * x));
+// 	rgb = (color & 0xFF0000) | (color & 0x00FF00) | (color & 0x0000FF);
+// 	return (rgb);
+// }
+
 static int	get_color(t_mlx *win, t_image img, const int x, const int y)
 {
-	int	rgb;
-	int	color;
+	char	*dest;
+	int		color;
+	int		rgb;
 
-	color = *(int *)(img.addr + \
-					(4 * win->res_x * (win->res_y - 1 - y)) + \
-					(4 * x));
+	dest = img.addr + (y * img.line_len + \
+				x * (img.bpp) / 8);
+	color = *(int *)dest;
 	rgb = (color & 0xFF0000) | (color & 0x00FF00) | (color & 0x0000FF);
 	return (rgb);
 }
 
-static void	write_bmp_img(const int fd, t_mlx *win, t_image img, const int loc)
+
+static void	write_bmp_img(const int fd, t_mlx *win, t_image img, const int padd)
 {
 	unsigned char	zero[3];
 	int				i;
@@ -51,21 +76,21 @@ static void	write_bmp_img(const int fd, t_mlx *win, t_image img, const int loc)
 	int				ret;
 
 	ft_bzero(zero, 3);
-	i = 0;
-	while (i < win->res_x)
+	i = win->res_y;
+	while (i > 0)
 	{
 		j = 0;
-		while (j < win->res_y)
+		while (j < win->res_x)
 		{
 			color = get_color(win, img, j, i);
 			ret = write(fd, &color, 3);
-			if (loc > 0 && ret >= 0)
-				ret = write(fd, &zero, loc);
 			if (ret < 0)
+				exit_error("Write error");
+			if (padd > 0 && write(fd, &zero, padd) < 0)
 				exit_error("Write error");
 			j++;
 		}
-		i++;
+		i--;
 	}
 }
 
@@ -73,17 +98,17 @@ void	save_bmp(t_game *game)
 {
 	int		fd;
 	int		filesize;
-	int		loc;
+	int		padd;
 	t_mlx	*win;
-	
+
 	win = &game->win;
 	fd = open("screenshot.bmp", O_WRONLY | O_CREAT, 0777 | O_TRUNC);
 	if (fd < 0)
 		exit_error("Failed to create bmp");
 	generate_image(game, &game->img_1);
-	loc = (4 - (win->res_x * 3) % 4) % 4;
-	filesize = 54 + (3 * (win->res_x + loc) * win->res_y);
+	padd = (4 - (win->res_x * 3) % 4) % 4;
+	filesize = 54 + (3 * (win->res_x + padd) * win->res_y);
 	write_bmp_header(fd, filesize, win->res_x, win->res_y);
-	write_bmp_img(fd, &game->win, game->img_1, loc);
+	write_bmp_img(fd, &game->win, game->img_1, padd);
 	close(fd);
 }
