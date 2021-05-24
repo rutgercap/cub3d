@@ -6,7 +6,7 @@
 /*   By: rutgercappendijk <rutgercappendijk@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 07:01:24 by rcappend          #+#    #+#             */
-/*   Updated: 2021/05/06 11:47:02 by rutgercappe      ###   ########.fr       */
+/*   Updated: 2021/05/17 10:59:03 by rutgercappe      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	generate_image(t_game *game, t_image *img)
 	}
 	if (sprites_found > 0)
 		draw_sprites(img, &game->map.sprites, *game, z_buffer);
+	free(z_buffer);
 }
 
 /*
