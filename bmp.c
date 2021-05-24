@@ -6,7 +6,7 @@
 /*   By: rutgercappendijk <rutgercappendijk@stud      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/12 15:00:22 by rutgercappe   #+#    #+#                 */
-/*   Updated: 2021/05/24 11:17:12 by rcappend      ########   odam.nl         */
+/*   Updated: 2021/05/24 13:51:43 by rcappend      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	write_bmp_header(const int fd, const int size, \
 	header[14] = (unsigned char)(40);
 	write_int(header + 18, res_x);
 	write_int(header + 22, res_y);
-	header[27] = (unsigned char)(1);
+	header[26] = (unsigned char)(1);
 	header[28] = (unsigned char)(24);
 	ret = write(fd, header, 54);
 	if (ret < 0)
@@ -95,6 +95,7 @@ void	save_bmp(t_game *game)
 	generate_image(game, &game->img_1);
 	padd = (4 - (win->res_x * 3) % 4) % 4;
 	filesize = 54 + (3 * (win->res_x + padd) * win->res_y);
+	// filesize = 1000 + (3 * (win->res_x + padd) * win->res_y);
 	write_bmp_header(fd, filesize, win->res_x, win->res_y);
 	write_bmp_img(fd, &game->win, game->img_1, padd);
 	close(fd);

@@ -6,7 +6,7 @@
 /*   By: rcappend <rcappend@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/18 09:37:53 by rcappend      #+#    #+#                 */
-/*   Updated: 2021/04/30 13:16:58 by rcappend      ########   odam.nl         */
+/*   Updated: 2021/05/24 15:07:47 by rcappend      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	set_transform(t_draw_spr *dst, const t_sprite sprite, \
 void	set_sprite_distance(t_sprite **head, \
 		const double pos_x, const double pos_y);
 
-void	set_draw_y(t_draw *draw, const int h, const double trans_y);
+void	set_draw_y(t_draw *draw, const int res_y, const double trans_y);
 
 void	set_draw_x(t_draw *draw, const t_mlx win, \
 		const double trans_y, const int sprite_x);

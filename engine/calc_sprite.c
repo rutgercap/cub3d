@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   calc_sprite.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: rutgercappendijk <rutgercappendijk@stud    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/12 12:48:07 by rcappend          #+#    #+#             */
-/*   Updated: 2021/05/14 10:25:42 by rutgercappe      ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   calc_sprite.c                                      :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: rutgercappendijk <rutgercappendijk@stud      +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2021/03/12 12:48:07 by rcappend      #+#    #+#                 */
+/*   Updated: 2021/05/24 15:18:56 by rcappend      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,14 @@ void	set_transform(t_draw_spr *dst, const t_sprite sprite, \
 								player.dir_x * rel_y);
 	dst->trans_y = inv_det * (-player.plane_y * rel_x + \
 								player.plane_x * rel_y);
-	dst->sprite_x = (int)(w / 2.0) * (1.0 + dst->trans_x / dst->trans_y);
+	dst->sprite_x = (int)(w / 2.0) *(1.0 + dst->trans_x / dst->trans_y);
 }
 
 void 	set_draw_y(t_draw *draw, const int res_y, const double trans_y)
 {
 	draw->length = (int)fabs(res_y / trans_y);
 	draw->draw_start = -draw->length / 2 + res_y / 2;
-	if (draw->draw_start < 0)
+	if (draw->draw_start < -EPSILON)
 		draw->draw_start = 0;
 	draw->draw_stop = draw->length / 2 + res_y / 2;
 	if (draw->draw_stop >= res_y)

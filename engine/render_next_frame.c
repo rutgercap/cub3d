@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   render_next_frame.c                                :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: rutgercappendijk <rutgercappendijk@stud    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/03 07:01:24 by rcappend          #+#    #+#             */
-/*   Updated: 2021/05/17 10:59:03 by rutgercappe      ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   render_next_frame.c                                :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: rutgercappendijk <rutgercappendijk@stud      +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2021/02/03 07:01:24 by rcappend      #+#    #+#                 */
+/*   Updated: 2021/05/24 14:06:28 by rcappend      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,14 @@ int	mlx_main_loop(t_game *game)
 	if (game->frame_counter % 2 == 0)
 	{
 		generate_image(game, &game->img_1);
-		mlx_put_image_to_window(game->win.mlx, game->win.win, game->img_1.img, 0, 0);
+		mlx_put_image_to_window(game->win.mlx, game->win.win, \
+								game->img_1.img, 0, 0);
 	}
 	else
 	{
 		generate_image(game, &game->img_2);
-		mlx_put_image_to_window(game->win.mlx, game->win.win, game->img_2.img, 0, 0);
+		mlx_put_image_to_window(game->win.mlx, game->win.win, \
+								game->img_2.img, 0, 0);
 	}
 	game->frame_counter += 1;
 	return (EXIT_SUCCESS);

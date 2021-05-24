@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   draw_sprites.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: rutgercappendijk <rutgercappendijk@stud    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/12 10:18:26 by rcappend          #+#    #+#             */
-/*   Updated: 2021/05/14 10:41:58 by rutgercappe      ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   draw_sprites.c                                     :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: rutgercappendijk <rutgercappendijk@stud      +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2021/03/12 10:18:26 by rcappend      #+#    #+#                 */
+/*   Updated: 2021/05/24 14:05:36 by rcappend      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,11 @@ static void	draw_sprite_y(t_image *img, t_draw_spr dr_sp, \
 							const int res_y, const int x)
 {
 	t_draw			draw_y;
-	// t_draw			draw_x;
 	char			*dest;
 	unsigned int	color;
 	int				d;
 
 	draw_y = dr_sp.draw_y;
-	// draw_x = dr_sp.draw_x;
 	while (draw_y.draw_start < draw_y.draw_stop)
 	{
 		d = draw_y.draw_start * 256 - res_y * 128 + draw_y.length * 128;

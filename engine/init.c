@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: rutgercappendijk <rutgercappendijk@stud    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/31 12:32:25 by rcappend          #+#    #+#             */
-/*   Updated: 2021/05/06 12:28:49 by rutgercappe      ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   init.c                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: rutgercappendijk <rutgercappendijk@stud      +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2021/01/31 12:32:25 by rcappend      #+#    #+#                 */
+/*   Updated: 2021/05/24 14:26:38 by rcappend      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	set_struct_values(t_game *game)
 	game->strafe = -1;
 	game->move = -1;
 	game->rotate = -1;
-	game->player.move_speed = 0.05;
+	game->player.move_speed = 0.01;
 	game->player.rot_speed = 0.02;
 }
 
