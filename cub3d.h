@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: rutgercappendijk <rutgercappendijk@stud    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/18 18:15:11 by rcappend          #+#    #+#             */
-/*   Updated: 2021/05/05 13:26:33 by rutgercappe      ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   cub3d.h                                            :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: rutgercappendijk <rutgercappendijk@stud      +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2021/01/18 18:15:11 by rcappend      #+#    #+#                 */
+/*   Updated: 2021/05/24 11:26:35 by rcappend      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,49 +30,49 @@
 **  sprite list struct
 */
 
-typedef struct 			s_sprite {
-	double              distance;
-    double				x;
-	double				y;
-	char				type;
-	struct s_sprite		*next;
-}						t_sprite;
+typedef struct s_sprite {
+	double			distance;
+	double			x;
+	double			y;
+	char			type;
+	struct s_sprite	*next;
+}					t_sprite;
 
 /*
 **	mlx, image and texture structs
 */
 
-typedef struct  s_mlx {
-    void        *mlx;
-    void        *win;
+typedef struct s_mlx {
+	void		*mlx;
+	void		*win;
 	int			res_x;
 	int			res_y;
-}               t_mlx;
+}				t_mlx;
 
-typedef struct  s_image {
-    void        *img;
-    char        *addr;
-    int         bpp;
-    int         line_len;
-    int         endian;
-}               t_image;
+typedef struct s_image {
+	void		*img;
+	char		*addr;
+	int			bpp;
+	int			line_len;
+	int			endian;
+}				t_image;
 
-typedef struct  s_text {
-    char		*path;
-    void        *img;
-    char        *addr;
-    int         bpp;
-    int         line_len;
-    int         endian;
-    int         height;
-    int         width;
-}               t_text;
+typedef struct s_text {
+	char		*path;
+	void		*img;
+	char		*addr;
+	int			bpp;
+	int			line_len;
+	int			endian;
+	int			height;
+	int			width;
+}				t_text;
 
 typedef struct s_textures {
-    t_text      no_text;
-    t_text      ea_text;
-    t_text      so_text;
-    t_text      we_text;
+	t_text		no_text;
+	t_text		ea_text;
+	t_text		so_text;
+	t_text		we_text;
 	t_text		spr_text;
 	int			f_col;
 	int			c_col;
@@ -82,37 +82,36 @@ typedef struct s_textures {
 **	structs used for game stats like the map and player attributes
 */
 
-typedef struct	s_map {
+typedef struct s_map {
 	t_sprite	*sprites;	
 	char		**map;
 	int			width;
 	int			height;
 }				t_map;
 
-typedef struct  s_player {
-    double      x;
-    double      y;
-    double      dir_x;
-    double      dir_y;
-    double      plane_x;
-    double      plane_y;
-    double      move_speed;
-    double      rot_speed;
-}               t_player;
+typedef struct s_player {
+	double		x;
+	double		y;
+	double		dir_x;
+	double		dir_y;
+	double		plane_x;
+	double		plane_y;
+	double		move_speed;
+	double		rot_speed;
+}				t_player;
 
-typedef struct	s_game
-{
+typedef struct s_game {
 	t_bool		save;
 	t_textures	textures;
 	t_mlx		win;
-    t_image     img_1;
-    t_image     img_2;
+	t_image		img_1;
+	t_image		img_2;
 	t_map		map;
 	t_player	player;
-    int         frame_counter;
-    int			move;
-    int			strafe;
-    int         rotate;
+	int			frame_counter;
+	int			move;
+	int			strafe;
+	int			rotate;
 }				t_game;
 
 void	init_mlx(t_game *game);

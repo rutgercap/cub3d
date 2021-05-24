@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   read_config.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: rutgercappendijk <rutgercappendijk@stud    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/18 18:00:26 by rcappend          #+#    #+#             */
-/*   Updated: 2021/05/12 16:20:47 by rutgercappe      ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   read_config.c                                      :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: rutgercappendijk <rutgercappendijk@stud      +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2021/01/18 18:00:26 by rcappend      #+#    #+#                 */
+/*   Updated: 2021/05/24 12:24:02 by rcappend      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,59 @@ static int	save_texture_path(const char *line, char **dest)
 	return (EXIT_SUCCESS);
 }
 
-static int	save_color(int *dest, char *line)
+// static int	save_color(int *dest, char *line)
+// {
+// 	if (!ft_isdigit(*line))
+// 		return (EXIT_FAILURE);
+// 	*dest = ft_atoi(line);
+// 	if (*dest > 255)
+// 		return (EXIT_FAILURE);
+// 	return (EXIT_SUCCESS);
+// }
+
+// static int	save_rgb(char *line, int *dest)
+// {
+// 	int		r;
+// 	int		g;
+// 	int		b;
+
+// 	while (ft_isspace(*line))
+// 		line++;
+// 	if (save_color(&r, line))
+// 		return (EXIT_FAILURE);
+// 	while (ft_isdigit(*line))
+// 		line++;
+// 	if (*line == ',')
+// 		line++;
+// 	if (save_color(&g, line))
+// 		return (EXIT_FAILURE);
+// 	while (ft_isdigit(*line))
+// 		line++;
+// 	if (*line == ',')
+// 		line++;
+// 	if (save_color(&b, line))
+// 		return (EXIT_FAILURE);
+// 	while (ft_isdigit(*line))
+// 		line++;
+// 	if (*line != '\0')
+// 		return (EXIT_FAILURE);
+// 	*dest = create_trgb(0, r, g, b);
+// 	return (EXIT_SUCCESS);
+// }
+
+static int	save_color(int *i, int *dest, char *line)
 {
-	if (!ft_isdigit(*line))
+	int		temp;
+
+	temp = *i;
+	while (ft_isspace(line[temp]))
+		temp++;
+	if (!ft_isdigit(line[temp]))
 		return (EXIT_FAILURE);
-	*dest = ft_atoi(line);
+	*dest = ft_atoi(line + temp);
+	while (ft_isdigit(line[temp]))
+		temp++;
+	*i = temp;
 	if (*dest > 255)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
@@ -63,29 +111,23 @@ static int	save_color(int *dest, char *line)
 
 static int	save_rgb(char *line, int *dest)
 {
+	int		i;
 	int		r;
 	int		g;
 	int		b;
 
-	while (ft_isspace(*line))
-		line++;
-	if (save_color(&r, line))
+	i = 0;
+	if (save_color(&i, &r, line))
 		return (EXIT_FAILURE);
-	while (ft_isdigit(*line))
-		line++;
-	if (*line == ',')
-		line++;
-	if (save_color(&g, line))
+	if (*(line + i) == ',')
+		i++;
+	if (save_color(&i, &g, line))
 		return (EXIT_FAILURE);
-	while (ft_isdigit(*line))
-		line++;
-	if (*line == ',')
-		line++;
-	if (save_color(&b, line))
+	if (*(line + i) == ',')
+		i++;
+	if (save_color(&i, &b, line))
 		return (EXIT_FAILURE);
-	while (ft_isdigit(*line))
-		line++;
-	if (*line != '\0')
+	if (*(line + i) != '\0')
 		return (EXIT_FAILURE);
 	*dest = create_trgb(0, r, g, b);
 	return (EXIT_SUCCESS);

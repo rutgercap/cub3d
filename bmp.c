@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   bmp.c                                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: rutgercappendijk <rutgercappendijk@stud    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/12 15:00:22 by rutgercappe       #+#    #+#             */
-/*   Updated: 2021/05/14 10:22:27 by rutgercappe      ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   bmp.c                                              :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: rutgercappendijk <rutgercappendijk@stud      +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2021/05/12 15:00:22 by rutgercappe   #+#    #+#                 */
+/*   Updated: 2021/05/24 11:17:12 by rcappend      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	write_int(unsigned char *dst, const int value)
 	dst[3] = (unsigned char)(value >> 24);
 }
 
-static void write_bmp_header(const int fd, const int size, \
+static void	write_bmp_header(const int fd, const int size, \
 							const int res_x, const int res_y)
 {
 	unsigned char	header[54];
@@ -41,19 +41,7 @@ static void write_bmp_header(const int fd, const int size, \
 		exit_error("Write error");
 }
 
-// static int	get_color(t_mlx *win, t_image img, const int x, const int y)
-// {
-// 	int	rgb;
-// 	int	color;
-
-// 	color = *(int *)(img.addr + \
-// 					(4 * win->res_x * (win->res_y - y)) + \
-// 					(4 * x));
-// 	rgb = (color & 0xFF0000) | (color & 0x00FF00) | (color & 0x0000FF);
-// 	return (rgb);
-// }
-
-static int	get_color(t_mlx *win, t_image img, const int x, const int y)
+static int	get_color(t_image img, const int x, const int y)
 {
 	char	*dest;
 	int		color;
@@ -65,7 +53,6 @@ static int	get_color(t_mlx *win, t_image img, const int x, const int y)
 	rgb = (color & 0xFF0000) | (color & 0x00FF00) | (color & 0x0000FF);
 	return (rgb);
 }
-
 
 static void	write_bmp_img(const int fd, t_mlx *win, t_image img, const int padd)
 {
@@ -82,7 +69,7 @@ static void	write_bmp_img(const int fd, t_mlx *win, t_image img, const int padd)
 		j = 0;
 		while (j < win->res_x)
 		{
-			color = get_color(win, img, j, i);
+			color = get_color(img, j, i);
 			ret = write(fd, &color, 3);
 			if (ret < 0)
 				exit_error("Write error");

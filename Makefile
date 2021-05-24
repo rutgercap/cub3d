@@ -6,7 +6,7 @@
 #    By: rcappend <rcappend@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/01/18 13:39:03 by rcappend      #+#    #+#                  #
-#    Updated: 2021/04/29 09:37:12 by rcappend      ########   odam.nl          #
+#    Updated: 2021/05/24 11:12:17 by rcappend      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME		=	cub3D
 
 SRCS		=	main.c bmp.c \
 				./utils/ft_strchr.c ./utils/ft_strlen.c ./utils/ft_atoi.c \
-				./utils/ft_isdigit.c ./utils/ft_strncmp.c ./utils/ft_substr.c \
+				./utils/ft_strncmp.c ./utils/ft_substr.c ./utils/ft_isdigit.c \
 				./utils/ft_calloc.c ./utils/ft_isspace.c ./utils/ft_memcpy.c \
 				./utils/ft_bzero.c ./utils/create_trgb.c ./utils/ft_strcpy.c \
 				./utils/ft_memset.c \

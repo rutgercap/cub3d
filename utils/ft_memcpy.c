@@ -6,7 +6,7 @@
 /*   By: rcappend <rcappend@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/29 15:41:53 by rcappend      #+#    #+#                 */
-/*   Updated: 2021/01/19 10:03:54 by rcappend      ########   odam.nl         */
+/*   Updated: 2021/05/24 11:36:15 by rcappend      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	*ft_memcpy(void *dst, void *src, size_t n)
 	unsigned char	*temp_dst;
 	unsigned char	*temp_src;
 
-	temp_dst = (unsigned char*)dst;
-	temp_src = (unsigned char*)src;
+	temp_dst = (unsigned char *)dst;
+	temp_src = (unsigned char *)src;
 	if (temp_dst == NULL && temp_src == NULL)
 		return (NULL);
 	while (n > 0)

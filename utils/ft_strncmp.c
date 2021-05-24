@@ -6,7 +6,7 @@
 /*   By: rcappend <rcappend@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/29 15:44:37 by rcappend      #+#    #+#                 */
-/*   Updated: 2021/01/19 10:03:54 by rcappend      ########   odam.nl         */
+/*   Updated: 2021/05/24 11:35:26 by rcappend      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	unsigned long i;
+	unsigned long	i;
 
 	if (n == 0)
 		return (0);
