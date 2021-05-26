@@ -35,7 +35,7 @@ MLX			=	libmlx.dylib
 
 CC			=	gcc
 
-CFLAGS		= 	-Wall -Werror -Wextra -g3 -I. # clean up
+CFLAGS		= 	-Wall -Werror -Wextra
 
 all:		$(NAME)
 $(NAME):	$(MLX) $(OBJS)
