@@ -6,7 +6,7 @@
 /*   By: rutgercappendijk <rutgercappendijk@stud      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/12 12:48:07 by rcappend      #+#    #+#                 */
-/*   Updated: 2021/05/24 15:18:56 by rcappend      ########   odam.nl         */
+/*   Updated: 2021/05/26 10:29:52 by rcappend      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void 	set_draw_y(t_draw *draw, const int res_y, const double trans_y)
 {
 	draw->length = (int)fabs(res_y / trans_y);
 	draw->draw_start = -draw->length / 2 + res_y / 2;
-	if (draw->draw_start < -EPSILON)
+	if (draw->draw_start < 0)
 		draw->draw_start = 0;
 	draw->draw_stop = draw->length / 2 + res_y / 2;
 	if (draw->draw_stop >= res_y)

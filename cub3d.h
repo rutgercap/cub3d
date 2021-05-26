@@ -6,7 +6,7 @@
 /*   By: rutgercappendijk <rutgercappendijk@stud      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/18 18:15:11 by rcappend      #+#    #+#                 */
-/*   Updated: 2021/05/24 15:18:48 by rcappend      ########   odam.nl         */
+/*   Updated: 2021/05/26 10:33:23 by rcappend      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@
 # define WALL 49
 # define SPRITE 50
 # define OPEN 32
-# define EPSILON 0.00000001
+
+# define HEADERSIZE 54
 
 # define X_EVENT_KEY_PRESS		2
 # define X_EVENT_KEY_RELEASE	3
@@ -132,8 +133,6 @@ int		key_press(const int keycode, t_game *game);
 int		key_release(const int keycode, t_game *game);
 
 int		mlx_main_loop(t_game *game);
-
-void	set_struct_values(t_game *game);
 
 void	generate_image(t_game *game, t_image *img);
 

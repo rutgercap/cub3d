@@ -6,7 +6,7 @@
 /*   By: rutgercappendijk <rutgercappendijk@stud      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/31 12:32:25 by rcappend      #+#    #+#                 */
-/*   Updated: 2021/05/24 14:26:38 by rcappend      ########   odam.nl         */
+/*   Updated: 2021/05/26 10:32:07 by rcappend      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,6 @@ static void	init_image(t_image *img, const t_mlx *win)
 				& img->endian);
 	if (!img->addr)
 		exit_error("Failed to initialise image");
-}
-
-void	set_struct_values(t_game *game)
-{
-	game->strafe = -1;
-	game->move = -1;
-	game->rotate = -1;
-	game->player.move_speed = 0.01;
-	game->player.rot_speed = 0.02;
 }
 
 void	init_mlx(t_game *game)

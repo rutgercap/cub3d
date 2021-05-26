@@ -6,7 +6,7 @@
 /*   By: rcappend <rcappend@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/18 18:11:34 by rcappend      #+#    #+#                 */
-/*   Updated: 2021/04/30 13:05:40 by rcappend      ########   odam.nl         */
+/*   Updated: 2021/05/26 10:32:20 by rcappend      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,14 @@ int	exit_error(char const *str)
 	exit(EXIT_FAILURE);
 }
 
-/*
-** Main consists of the five steps to start the game:
-** 1:	Read the '.cub' file. This includes error checking in the map or config
-**		"config/file_parser.c"
-** 2:	Initialise game based on the config
-**		"engine/init.c"
-** 3:	Loading textures based on file paths
-**		"config/load_textures.c"
-** 4:	Saving sprites from the map
-**		"config/sprite_utils.c"
-** 5:	Initialising the mlx hooks and starting the loop (starting the game)
-**		"engine/render_next_frame.c"
-** If any of these steps fails, the game exits with an error message
-** This automatically deallocates the memory
-*/
+static void	set_struct_values(t_game *game)
+{
+	game->strafe = -1;
+	game->move = -1;
+	game->rotate = -1;
+	game->player.move_speed = 0.12;
+	game->player.rot_speed = 0.05;
+}
 
 static void	start_game(t_game *game)
 {

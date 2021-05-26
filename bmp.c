@@ -6,39 +6,17 @@
 /*   By: rutgercappendijk <rutgercappendijk@stud      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/12 15:00:22 by rutgercappe   #+#    #+#                 */
-/*   Updated: 2021/05/24 13:51:43 by rcappend      ########   odam.nl         */
+/*   Updated: 2021/05/26 10:28:35 by rcappend      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	write_int(unsigned char *dst, const int value)
+int	header_size(int x, int y)
 {
-	dst[0] = (unsigned char)(value);
-	dst[1] = (unsigned char)(value >> 8);
-	dst[2] = (unsigned char)(value >> 16);
-	dst[3] = (unsigned char)(value >> 24);
-}
-
-static void	write_bmp_header(const int fd, const int size, \
-							const int res_x, const int res_y)
-{
-	unsigned char	header[54];
-	int				ret;
-
-	ft_bzero(header, 54);
-	header[0] = (unsigned char)('B');
-	header[1] = (unsigned char)('M');
-	write_int(header + 2, size);
-	header[10] = (unsigned char)(54);
-	header[14] = (unsigned char)(40);
-	write_int(header + 18, res_x);
-	write_int(header + 22, res_y);
-	header[26] = (unsigned char)(1);
-	header[28] = (unsigned char)(24);
-	ret = write(fd, header, 54);
-	if (ret < 0)
-		exit_error("Write error");
+	if (3 * x % 4 != 0)
+		x = x + 4 - ((3 * x) % 4);
+	return (54 + (3 * x * y));
 }
 
 static int	get_color(t_image img, const int x, const int y)
@@ -54,38 +32,52 @@ static int	get_color(t_image img, const int x, const int y)
 	return (rgb);
 }
 
-static void	write_bmp_img(const int fd, t_mlx *win, t_image img, const int padd)
+static void	write_bmp_header(uint8_t *buff, const int res_x, \
+							const int res_y, const size_t filesize)
 {
-	unsigned char	zero[3];
-	int				i;
-	int				j;
-	int				color;
-	int				ret;
+	*((uint8_t *)&buff[0]) = (uint8_t)0x42;
+	*((uint8_t *)&buff[1]) = (uint8_t)0x4D;
+	*((uint32_t *)&buff[2]) = (uint32_t)filesize;
+	*((uint32_t *)&buff[10]) = (uint32_t)54;
+	*((uint32_t *)&buff[14]) = (uint32_t)0x28;
+	*((uint32_t *)&buff[18]) = (uint32_t)res_x;
+	*((uint32_t *)&buff[22]) = (uint32_t)res_y;
+	*((uint16_t *)&buff[26]) = (uint16_t)0x01;
+	*((uint16_t *)&buff[28]) = (uint16_t)0x18;
+}
 
-	ft_bzero(zero, 3);
-	i = win->res_y;
-	while (i > 0)
+static void	write_bmp_img(uint8_t *buff, t_image *img, \
+							const int res_x, int res_y)
+{
+	uint32_t	i;
+	int			index_x;
+	int			color;
+
+	i = HEADERSIZE;
+	res_y--;
+	while (res_y >= 0)
 	{
-		j = 0;
-		while (j < win->res_x)
+		index_x = 0;
+		while (index_x < res_x)
 		{
-			color = get_color(img, j, i);
-			ret = write(fd, &color, 3);
-			if (ret < 0)
-				exit_error("Write error");
-			if (padd > 0 && write(fd, &zero, padd) < 0)
-				exit_error("Write error");
-			j++;
+			color = get_color(*img, index_x, res_y);
+			buff[i + 0] = color;
+			buff[i + 1] = color >> 8;
+			buff[i + 2] = color >> 16;
+			i += 3;
+			index_x++;
 		}
-		i--;
+		if ((res_x * 3) % 4 != 0)
+			i += 4 - (res_x * 3) % 4;
+		res_y--;
 	}
 }
 
 void	save_bmp(t_game *game)
 {
 	int		fd;
-	int		filesize;
-	int		padd;
+	uint8_t	*buff;
+	size_t	filesize;
 	t_mlx	*win;
 
 	win = &game->win;
@@ -93,10 +85,15 @@ void	save_bmp(t_game *game)
 	if (fd < 0)
 		exit_error("Failed to create bmp");
 	generate_image(game, &game->img_1);
-	padd = (4 - (win->res_x * 3) % 4) % 4;
-	filesize = 54 + (3 * (win->res_x + padd) * win->res_y);
-	// filesize = 1000 + (3 * (win->res_x + padd) * win->res_y);
-	write_bmp_header(fd, filesize, win->res_x, win->res_y);
-	write_bmp_img(fd, &game->win, game->img_1, padd);
-	close(fd);
+	filesize = header_size(win->res_x, win->res_y);
+	buff = ft_calloc(filesize, 1);
+	write_bmp_header(buff, win->res_x, win->res_y, filesize);
+	write_bmp_img(buff, &game->img_1, win->res_x, win->res_y);
+	if (!buff)
+		exit_error("Malloc failure");
+	if (write(fd, buff, filesize) < 0)
+		exit_error("Write failure");
+	if (close(fd) < 0)
+		exit_error("File closing failure");
+	free(buff);
 }
