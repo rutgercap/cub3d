@@ -6,16 +6,15 @@
 /*   By: rcappend <rcappend@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/18 09:37:53 by rcappend      #+#    #+#                 */
-/*   Updated: 2021/05/24 15:07:47 by rcappend      ########   odam.nl         */
+/*   Updated: 2021/05/28 10:45:27 by rcappend      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENGINE_H
 # define ENGINE_H
 
-# include <mlx/mlx.h>
-# include "cub3d.h"
-# include <stdio.h>
+# include "../mlx/mlx.h"
+# include "../cub3d.h"
 # include <math.h>
 
 # define KEY_W 13

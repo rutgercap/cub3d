@@ -6,7 +6,7 @@
 #    By: rcappend <rcappend@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/01/18 13:39:03 by rcappend      #+#    #+#                  #
-#    Updated: 2021/05/26 10:29:27 by rcappend      ########   odam.nl          #
+#    Updated: 2021/05/28 09:09:23 by rcappend      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ MLX			=	libmlx.dylib
 
 CC			=	gcc
 
-CFLAGS		= 	-Wall -Werror -Wextra
+CFLAGS		= 	-Wall -Werror -Wextra -g3 -fsanitize=address
 
 all:		$(NAME)
 $(NAME):	$(MLX) $(OBJS)

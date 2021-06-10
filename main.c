@@ -6,11 +6,12 @@
 /*   By: rcappend <rcappend@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/18 18:11:34 by rcappend      #+#    #+#                 */
-/*   Updated: 2021/05/26 10:32:20 by rcappend      ########   odam.nl         */
+/*   Updated: 2021/05/28 10:46:11 by rcappend      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include <stdio.h>
 
 int	exit_error(char const *str)
 {
@@ -24,7 +25,7 @@ static void	set_struct_values(t_game *game)
 	game->strafe = -1;
 	game->move = -1;
 	game->rotate = -1;
-	game->player.move_speed = 0.12;
+	game->player.move_speed = 0.04;
 	game->player.rot_speed = 0.05;
 }
 

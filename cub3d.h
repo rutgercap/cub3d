@@ -6,7 +6,7 @@
 /*   By: rutgercappendijk <rutgercappendijk@stud      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/01/18 18:15:11 by rcappend      #+#    #+#                 */
-/*   Updated: 2021/05/26 10:33:23 by rcappend      ########   odam.nl         */
+/*   Updated: 2021/05/28 10:10:05 by rcappend      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,18 @@
 
 # include "utils/utils.h"
 # include <fcntl.h>
-# include <mlx/mlx.h>
-# include <stdio.h>
+# include "mlx/mlx.h"
+// # include <stdio.h>
+
+
 
 # define FLOOR 48
 # define WALL 49
 # define SPRITE 50
 # define OPEN 32
-
 # define HEADERSIZE 54
+# define EPSILON 0.00001
+
 
 # define X_EVENT_KEY_PRESS		2
 # define X_EVENT_KEY_RELEASE	3

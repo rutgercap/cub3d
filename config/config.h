@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   config.h                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: rutgercappendijk <rutgercappendijk@stud    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/18 18:13:38 by rcappend          #+#    #+#             */
-/*   Updated: 2021/05/12 15:02:13 by rutgercappe      ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   config.h                                           :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: rutgercappendijk <rutgercappendijk@stud      +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2021/01/18 18:13:38 by rcappend      #+#    #+#                 */
+/*   Updated: 2021/05/28 08:57:01 by rcappend      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 # define CONFIG_H
 
 # include <fcntl.h>
-# include "gnl/get_next_line.h"
-# include "utils/utils.h"
-# include "cub3d.h"
+# include "../gnl/get_next_line.h"
+# include "../utils/utils.h"
+# include "../cub3d.h"
 
 # define WALL 49
 # define FLOOR 48

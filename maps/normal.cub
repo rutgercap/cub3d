@@ -1,4 +1,4 @@
-R 10 10
+R 480 360
 NO ./textures/redbrick.png
 SO ./textures/greystone.png
 WE ./textures/colorstone.png

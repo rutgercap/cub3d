@@ -6,7 +6,7 @@
 /*   By: rcappend <rcappend@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/30 10:39:19 by rcappend      #+#    #+#                 */
-/*   Updated: 2021/01/18 18:53:33 by rcappend      ########   odam.nl         */
+/*   Updated: 2021/05/28 08:58:49 by rcappend      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-# include "utils/utils.h"
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 128
