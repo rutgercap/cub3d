@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: rcappend <rcappend@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2021/01/18 18:11:34 by rcappend      #+#    #+#                 */
-/*   Updated: 2021/05/28 10:46:11 by rcappend      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rutgercappendijk <rutgercappendijk@stud    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/01/18 18:11:34 by rcappend          #+#    #+#             */
+/*   Updated: 2021/06/10 14:43:20 by rutgercappe      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,16 @@ static void	set_struct_values(t_game *game)
 	game->player.rot_speed = 0.05;
 }
 
+static int	stop_game(t_game *game)
+{
+	mlx_destroy_window(game->win.mlx, game->win.win);
+	exit(0);
+}
+
 static void	start_game(t_game *game)
 {
 	set_struct_values(game);
+	mlx_hook(game->win.win, 17, 0L, stop_game, game);
 	mlx_hook(game->win.win, X_EVENT_KEY_PRESS, 0, key_press, game);
 	mlx_hook(game->win.win, X_EVENT_KEY_RELEASE, 0, key_release, game);
 	mlx_loop_hook(game->win.mlx, mlx_main_loop, game);
